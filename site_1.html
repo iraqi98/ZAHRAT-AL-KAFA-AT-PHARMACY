@@ -75,19 +75,6 @@
   }
   @media (max-width: 720px){ .container{ padding: 0 18px; } }
 
-  /* ---------- top strip ---------- */
-  .topstrip{
-    background: var(--accent-strong);
-    color: #F1F7F3;
-    font-size: 0.85rem;
-  }
-  .topstrip .row{
-    display:flex; justify-content:space-between; align-items:center;
-    gap: 16px; padding: 8px 0; flex-wrap: wrap;
-  }
-  .topstrip .item{ display:flex; align-items:center; gap:8px; opacity:.92; }
-  .topstrip svg{ width:15px; height:15px; flex:none; }
-
   /* ---------- nav ---------- */
   header.nav{
     position: sticky; top:0; z-index: 40;
@@ -215,6 +202,7 @@
     position:relative;
   }
   .product-media svg{ width:56%; height:56%; color: var(--accent); opacity:.85; }
+  .product-media img{ width:100%; height:100%; object-fit:cover; }
   .product-media .badge{
     position:absolute; top:12px; inset-inline-start:12px;
     background: var(--gold); color:#1A1400; font-size:0.72rem; font-weight:800;
@@ -373,24 +361,6 @@
     .cart-drawer, .cart-overlay{ transition:none; }
   }
 </style>
-
-<!-- ===== top strip ===== -->
-<div class="topstrip">
-  <div class="container row">
-    <div class="item">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 8v4l3 3"/><circle cx="12" cy="12" r="9"/></svg>
-      <span>مفتوحة يوميًا 8 صباحًا – 12 منتصف الليل</span>
-    </div>
-    <div class="item">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
-      <span>شارع الرشيد، بغداد — مقابل مستشفى الكرخ</span>
-    </div>
-    <div class="item">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.68 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.32 1.85.55 2.81.68A2 2 0 0 1 22 16.92Z"/></svg>
-      <span dir="ltr">+964 780 123 4567</span>
-    </div>
-  </div>
-</div>
 
 <!-- ===== nav ===== -->
 <header class="nav">
@@ -616,6 +586,142 @@
             <div class="product-foot">
               <span class="price">6,000<small> د.ع</small></span>
               <button class="btn add-cart-btn btn-sm" onclick="addToCart(this,'p6','كمامات طبية — علبة 50 قطعة',6000)">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 4h2l2.4 12.2A2 2 0 0 0 9.36 18H18a2 2 0 0 0 1.96-1.6L21.5 8H6"/></svg>
+                أضف للسلة
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div class="product-card">
+          <div class="product-media">
+            <img src="images/Panadol extra.jpg" alt="Panadol Extra Advance">
+          </div>
+          <div class="product-body">
+            <h4>Panadol Extra Advance</h4>
+            <p class="desc">مسكن قوي للألم يجمع الباراسيتامول مع الكافيين، فعال لآلام الصداع والدورة الشهرية.</p>
+            <div class="product-foot">
+              <span class="price">3,000<small> د.ع</small></span>
+              <button class="btn add-cart-btn btn-sm" onclick="addToCart(this,'p13','Panadol Extra Advance',3000)">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 4h2l2.4 12.2A2 2 0 0 0 9.36 18H18a2 2 0 0 0 1.96-1.6L21.5 8H6"/></svg>
+                أضف للسلة
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div class="product-card">
+          <div class="product-media">
+            <img src="images/Panadol advance.jpg" alt="Panadol Advance">
+          </div>
+          <div class="product-body">
+            <h4>Panadol Advance</h4>
+            <p class="desc">مسكن وخافض حرارة سريع المفعول، 24 قرص.</p>
+            <div class="product-foot">
+              <span class="price">2,500<small> د.ع</small></span>
+              <button class="btn add-cart-btn btn-sm" onclick="addToCart(this,'p14','Panadol Advance',2500)">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 4h2l2.4 12.2A2 2 0 0 0 9.36 18H18a2 2 0 0 0 1.96-1.6L21.5 8H6"/></svg>
+                أضف للسلة
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div class="product-card">
+          <div class="product-media">
+            <img src="images/Minoxidil 5% Shampoo.jpg" alt="Minoxidil Plus 5% Shampoo">
+          </div>
+          <div class="product-body">
+            <h4>Minoxidil Plus 5% Shampoo</h4>
+            <p class="desc">شامبو لعلاج تساقط الشعر وتحفيز نموه من جديد.</p>
+            <div class="product-foot">
+              <span class="price">15,000<small> د.ع</small></span>
+              <button class="btn add-cart-btn btn-sm" onclick="addToCart(this,'p15','Minoxidil Plus 5% Shampoo',15000)">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 4h2l2.4 12.2A2 2 0 0 0 9.36 18H18a2 2 0 0 0 1.96-1.6L21.5 8H6"/></svg>
+                أضف للسلة
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div class="product-card">
+          <div class="product-media">
+            <img src="images/Diostar 80mg.jpg" alt="Diostar 80mg">
+          </div>
+          <div class="product-body">
+            <h4>Diostar 80mg (Valsartan)</h4>
+            <p class="desc">لعلاج ضغط الدم المرتفع، 30 قرص.</p>
+            <div class="product-foot">
+              <span class="price">8,000<small> د.ع</small></span>
+              <button class="btn add-cart-btn btn-sm" onclick="addToCart(this,'p16','Diostar 80mg',8000)">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 4h2l2.4 12.2A2 2 0 0 0 9.36 18H18a2 2 0 0 0 1.96-1.6L21.5 8H6"/></svg>
+                أضف للسلة
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div class="product-card">
+          <div class="product-media">
+            <img src="images/Diostar 160mg.jpg" alt="Diostar 160mg">
+          </div>
+          <div class="product-body">
+            <h4>Diostar 160mg (Valsartan)</h4>
+            <p class="desc">لعلاج ضغط الدم المرتفع، تركيز أعلى، 30 قرص.</p>
+            <div class="product-foot">
+              <span class="price">10,000<small> د.ع</small></span>
+              <button class="btn add-cart-btn btn-sm" onclick="addToCart(this,'p17','Diostar 160mg',10000)">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 4h2l2.4 12.2A2 2 0 0 0 9.36 18H18a2 2 0 0 0 1.96-1.6L21.5 8H6"/></svg>
+                أضف للسلة
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div class="product-card">
+          <div class="product-media">
+            <img src="images/Strepsils honey&amp;lemon.jpg" alt="Strepsils Honey and Lemon">
+          </div>
+          <div class="product-body">
+            <h4>Strepsils Honey &amp; Lemon</h4>
+            <p class="desc">حبوب مص لتهدئة التهاب الحلق بنكهة العسل والليمون، علبة 24 قرص.</p>
+            <div class="product-foot">
+              <span class="price">4,000<small> د.ع</small></span>
+              <button class="btn add-cart-btn btn-sm" onclick="addToCart(this,'p18','Strepsils Honey and Lemon',4000)">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 4h2l2.4 12.2A2 2 0 0 0 9.36 18H18a2 2 0 0 0 1.96-1.6L21.5 8H6"/></svg>
+                أضف للسلة
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div class="product-card">
+          <div class="product-media">
+            <img src="images/Strepsils orange with vitamin c.jpg" alt="Strepsils Orange with Vitamin C">
+          </div>
+          <div class="product-body">
+            <h4>Strepsils Orange with Vitamin C</h4>
+            <p class="desc">حبوب مص لالتهاب الحلق مدعمة بفيتامين سي، علبة 24 قرص.</p>
+            <div class="product-foot">
+              <span class="price">4,000<small> د.ع</small></span>
+              <button class="btn add-cart-btn btn-sm" onclick="addToCart(this,'p19','Strepsils Orange with Vitamin C',4000)">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 4h2l2.4 12.2A2 2 0 0 0 9.36 18H18a2 2 0 0 0 1.96-1.6L21.5 8H6"/></svg>
+                أضف للسلة
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div class="product-card">
+          <div class="product-media">
+            <img src="images/Oflam.jpg" alt="Oflam">
+          </div>
+          <div class="product-body">
+            <h4>Oflam (ديكلوفيناك بوتاسيوم)</h4>
+            <p class="desc">لعلاج الآلام والالتهابات، حبيبات قابلة للذوبان، علبة 10 أكياس.</p>
+            <div class="product-foot">
+              <span class="price">3,500<small> د.ع</small></span>
+              <button class="btn add-cart-btn btn-sm" onclick="addToCart(this,'p20','Oflam',3500)">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 4h2l2.4 12.2A2 2 0 0 0 9.36 18H18a2 2 0 0 0 1.96-1.6L21.5 8H6"/></svg>
                 أضف للسلة
               </button>
