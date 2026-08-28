@@ -183,6 +183,7 @@
   .cat-pill.active{ background: var(--accent-strong); color:#EFFBF4; border-color:var(--accent-strong); }
 
   .cat-block{ margin-bottom: 46px; }
+  .cat-block.is-hidden{ display:none; }
   .cat-block > h3{
     display:flex; align-items:center; gap:12px; font-size:1.2rem; margin-bottom:20px;
   }
@@ -480,13 +481,13 @@
     </div>
 
     <div class="cat-tabs">
-      <span class="cat-pill active">الكل</span>
-      <span class="cat-pill">أدوية عامة</span>
-      <span class="cat-pill">مكملات غذائية</span>
-      <span class="cat-pill">العناية والتجميل</span>
+      <button type="button" class="cat-pill active" data-cat="all" onclick="filterCategory('all', this)">الكل</button>
+      <button type="button" class="cat-pill" data-cat="meds" onclick="filterCategory('meds', this)">أدوية عامة</button>
+      <button type="button" class="cat-pill" data-cat="supplements" onclick="filterCategory('supplements', this)">مكملات غذائية</button>
+      <button type="button" class="cat-pill" data-cat="care" onclick="filterCategory('care', this)">العناية والتجميل</button>
     </div>
 
-    <div class="cat-block">
+    <div class="cat-block" data-cat="meds">
       <h3>أدوية عامة</h3>
       <div class="product-grid">
 
@@ -629,23 +630,6 @@
 
         <div class="product-card">
           <div class="product-media">
-            <img src="images/Minoxidil-Shampoo.jpg" alt="Minoxidil Plus 5% Shampoo">
-          </div>
-          <div class="product-body">
-            <h4>Minoxidil Plus 5% Shampoo</h4>
-            <p class="desc">شامبو لعلاج تساقط الشعر وتحفيز نموه من جديد.</p>
-            <div class="product-foot">
-              <span class="price">15,000<small> د.ع</small></span>
-              <button class="btn add-cart-btn btn-sm" onclick="addToCart(this,'p15','Minoxidil Plus 5% Shampoo',15000)">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 4h2l2.4 12.2A2 2 0 0 0 9.36 18H18a2 2 0 0 0 1.96-1.6L21.5 8H6"/></svg>
-                أضف للسلة
-              </button>
-            </div>
-          </div>
-        </div>
-
-        <div class="product-card">
-          <div class="product-media">
             <img src="images/Diostar 80mg.jpg" alt="Diostar 80mg">
           </div>
           <div class="product-body">
@@ -732,7 +716,7 @@
       </div>
     </div>
 
-    <div class="cat-block">
+    <div class="cat-block" data-cat="supplements">
       <h3>مكملات غذائية</h3>
       <div class="product-grid">
 
@@ -832,6 +816,30 @@
             <div class="product-foot">
               <span class="price">7,500<small> د.ع</small></span>
               <button class="btn add-cart-btn btn-sm" onclick="addToCart(this,'p12','زنك + فيتامين سي — 30 قرص',7500)">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 4h2l2.4 12.2A2 2 0 0 0 9.36 18H18a2 2 0 0 0 1.96-1.6L21.5 8H6"/></svg>
+                أضف للسلة
+              </button>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="cat-block" data-cat="care">
+      <h3>العناية والتجميل</h3>
+      <div class="product-grid">
+
+        <div class="product-card">
+          <div class="product-media">
+            <img src="images/Minoxidil-Shampoo.jpg" alt="Minoxidil Plus 5% Shampoo">
+          </div>
+          <div class="product-body">
+            <h4>Minoxidil Plus 5% Shampoo</h4>
+            <p class="desc">شامبو لعلاج تساقط الشعر وتحفيز نموه من جديد.</p>
+            <div class="product-foot">
+              <span class="price">15,000<small> د.ع</small></span>
+              <button class="btn add-cart-btn btn-sm" onclick="addToCart(this,'p15','Minoxidil Plus 5% Shampoo',15000)">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 4h2l2.4 12.2A2 2 0 0 0 9.36 18H18a2 2 0 0 0 1.96-1.6L21.5 8H6"/></svg>
                 أضف للسلة
               </button>
@@ -1000,6 +1008,15 @@
         btnEl.innerHTML = original;
       }, 1100);
     }
+  }
+
+  function filterCategory(cat, btnEl){
+    document.querySelectorAll(".cat-pill").forEach(function(p){ p.classList.remove("active"); });
+    if(btnEl){ btnEl.classList.add("active"); }
+    document.querySelectorAll(".cat-block").forEach(function(block){
+      var show = cat === "all" || block.getAttribute("data-cat") === cat;
+      block.classList.toggle("is-hidden", !show);
+    });
   }
 
   function changeQty(id, delta){
