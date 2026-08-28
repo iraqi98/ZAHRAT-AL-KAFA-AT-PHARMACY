@@ -1,0 +1,991 @@
+<title>صيدلية الشفاء</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Kufi+Arabic:wght@500;700;800&family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<div dir="rtl" lang="ar">
+
+<style>
+  :root{
+    --bg: #FBFBF6;
+    --surface: #FFFFFF;
+    --surface-alt: #EAF4ED;
+    --ink: #142720;
+    --ink-muted: #55685D;
+    --accent: #2F6B4F;
+    --accent-strong: #1B4332;
+    --accent-soft: #D6EBDF;
+    --border: #DCE7DF;
+    --gold: #AD8A34;
+    --shadow: 0 18px 40px -22px rgba(20,39,32,0.35);
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --bg: #0E1912;
+      --surface: #152219;
+      --surface-alt: #1B2C21;
+      --ink: #E9F2EC;
+      --ink-muted: #9FB5A8;
+      --accent: #57BE8C;
+      --accent-strong: #7FD3A6;
+      --accent-soft: #203829;
+      --border: #28392F;
+      --gold: #D8B65C;
+      --shadow: 0 18px 40px -22px rgba(0,0,0,0.6);
+    }
+  }
+  :root[data-theme="dark"]{
+    --bg: #0E1912;
+    --surface: #152219;
+    --surface-alt: #1B2C21;
+    --ink: #E9F2EC;
+    --ink-muted: #9FB5A8;
+    --accent: #57BE8C;
+    --accent-strong: #7FD3A6;
+    --accent-soft: #203829;
+    --border: #28392F;
+    --gold: #D8B65C;
+    --shadow: 0 18px 40px -22px rgba(0,0,0,0.6);
+  }
+
+  *{ box-sizing: border-box; }
+  html,body{ margin:0; padding:0; }
+  body{
+    background: var(--bg);
+    color: var(--ink);
+    font-family: "IBM Plex Sans Arabic", "Segoe UI", Tahoma, sans-serif;
+    line-height: 1.75;
+    -webkit-font-smoothing: antialiased;
+  }
+  h1,h2,h3,h4{
+    font-family: "Noto Kufi Arabic", "IBM Plex Sans Arabic", sans-serif;
+    color: var(--accent-strong);
+    text-wrap: balance;
+    margin: 0;
+    font-weight: 700;
+  }
+  p{ margin:0; }
+  a{ color: inherit; }
+  img,svg{ display:block; max-width:100%; }
+  .container{
+    max-width: 1180px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+  @media (max-width: 720px){ .container{ padding: 0 18px; } }
+
+  /* ---------- top strip ---------- */
+  .topstrip{
+    background: var(--accent-strong);
+    color: #F1F7F3;
+    font-size: 0.85rem;
+  }
+  .topstrip .row{
+    display:flex; justify-content:space-between; align-items:center;
+    gap: 16px; padding: 8px 0; flex-wrap: wrap;
+  }
+  .topstrip .item{ display:flex; align-items:center; gap:8px; opacity:.92; }
+  .topstrip svg{ width:15px; height:15px; flex:none; }
+
+  /* ---------- nav ---------- */
+  header.nav{
+    position: sticky; top:0; z-index: 40;
+    background: color-mix(in srgb, var(--surface) 92%, transparent);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--border);
+  }
+  .nav .row{
+    display:flex; align-items:center; justify-content:space-between;
+    padding: 14px 0; gap: 20px;
+  }
+  .brand{ display:flex; align-items:center; gap:10px; }
+  .brand .mark{ width:38px; height:38px; flex:none; object-fit: contain; border-radius: 8px; }
+  .brand .name{ font-size:1.25rem; font-weight:800; color:var(--accent-strong); }
+  .brand .tag{ font-size:0.72rem; color:var(--ink-muted); font-family:"IBM Plex Sans Arabic"; }
+  nav.links{ display:flex; gap:26px; font-size:0.95rem; font-weight:500; }
+  nav.links a{ text-decoration:none; color:var(--ink); position:relative; padding: 4px 0; }
+  nav.links a:hover{ color: var(--accent); }
+  nav.links a:focus-visible, .btn:focus-visible, a:focus-visible{ outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 4px; }
+  @media (max-width: 860px){ nav.links{ display:none; } }
+
+  .btn{
+    display:inline-flex; align-items:center; gap:9px;
+    padding: 12px 22px; border-radius: 999px;
+    font-weight:700; font-size:0.95rem; text-decoration:none;
+    border: 1px solid transparent; cursor:pointer;
+    transition: transform .15s ease, box-shadow .15s ease;
+    white-space: nowrap;
+  }
+  .btn:hover{ transform: translateY(-1px); }
+  .btn svg{ width:18px; height:18px; flex:none; }
+  .btn-primary{
+    background: linear-gradient(180deg, #34C77E, #1F9D5F);
+    color:#08170F; box-shadow: 0 12px 24px -12px rgba(31,157,95,.65);
+  }
+  .btn-ghost{
+    background: var(--surface-alt); color: var(--accent-strong);
+    border-color: var(--border);
+  }
+  .btn-outline{
+    background: transparent; color: var(--accent-strong);
+    border-color: var(--accent-strong);
+  }
+  .btn-sm{ padding: 9px 16px; font-size:0.85rem; }
+
+  /* ---------- hero ---------- */
+  .hero{
+    position: relative;
+    overflow: hidden;
+    background: var(--surface-alt);
+    border-bottom: 1px solid var(--border);
+  }
+  .hero .row{
+    display:grid; grid-template-columns: 1.1fr 0.9fr; gap: 48px;
+    align-items:center; padding: 64px 0 56px;
+  }
+  @media (max-width: 900px){ .hero .row{ grid-template-columns: 1fr; padding: 40px 0; } }
+  .eyebrow{
+    display:inline-flex; align-items:center; gap:8px;
+    font-size:0.8rem; font-weight:700; letter-spacing:.04em;
+    color: var(--accent); background: var(--accent-soft);
+    padding: 6px 14px; border-radius: 999px; margin-bottom: 18px;
+  }
+  .hero h1{ font-size: clamp(1.9rem, 3.4vw, 2.85rem); line-height:1.28; }
+  .hero .lede{ margin-top:16px; font-size:1.08rem; color: var(--ink-muted); max-width: 46ch; }
+  .hero .ctas{ display:flex; gap:14px; margin-top: 30px; flex-wrap:wrap; }
+  .hero .trust{ display:flex; gap:26px; margin-top:38px; flex-wrap:wrap; }
+  .hero .trust .t{ display:flex; align-items:center; gap:9px; font-size:0.88rem; color:var(--ink-muted); font-weight:600; }
+  .hero .trust svg{ width:20px; height:20px; color: var(--accent); flex:none; }
+
+  .hero-art{ position:relative; display:flex; align-items:center; justify-content:center; }
+  .hero-art svg{ width: 100%; max-width: 420px; height:auto; }
+
+  /* ---------- sections ---------- */
+  section{ padding: 76px 0; }
+  .section-head{ max-width: 640px; margin-bottom: 44px; }
+  .section-head .eyebrow{ margin-bottom: 14px; }
+  .section-head h2{ font-size: clamp(1.5rem, 2.4vw, 2.1rem); }
+  .section-head .desc{ margin-top:12px; color: var(--ink-muted); font-size:1rem; }
+
+  /* services */
+  .services-grid{
+    display:grid; grid-template-columns: repeat(4, 1fr); gap: 20px;
+  }
+  @media (max-width: 980px){ .services-grid{ grid-template-columns: repeat(2,1fr); } }
+  @media (max-width: 560px){ .services-grid{ grid-template-columns: 1fr; } }
+  .service-card{
+    background: var(--surface); border:1px solid var(--border);
+    border-radius: 18px; padding: 26px 22px; box-shadow: var(--shadow);
+  }
+  .service-card .ic{
+    width:48px; height:48px; border-radius:12px;
+    background: var(--accent-soft); color: var(--accent-strong);
+    display:flex; align-items:center; justify-content:center; margin-bottom:16px;
+  }
+  .service-card .ic svg{ width:24px; height:24px; }
+  .service-card h3{ font-size:1.05rem; margin-bottom:8px; }
+  .service-card p{ color: var(--ink-muted); font-size:0.92rem; }
+
+  /* products */
+  .cat-tabs{ display:flex; gap:10px; margin-bottom:30px; flex-wrap:wrap; }
+  .cat-pill{
+    padding: 9px 18px; border-radius:999px; font-size:0.88rem; font-weight:700;
+    background: var(--surface); border:1px solid var(--border); color: var(--ink-muted);
+  }
+  .cat-pill.active{ background: var(--accent-strong); color:#EFFBF4; border-color:var(--accent-strong); }
+
+  .cat-block{ margin-bottom: 46px; }
+  .cat-block > h3{
+    display:flex; align-items:center; gap:12px; font-size:1.2rem; margin-bottom:20px;
+  }
+  .cat-block > h3::after{ content:""; flex:1; height:1px; background: var(--border); }
+
+  .product-grid{ display:grid; grid-template-columns: repeat(3, 1fr); gap: 22px; }
+  @media (max-width: 980px){ .product-grid{ grid-template-columns: repeat(2,1fr); } }
+  @media (max-width: 620px){ .product-grid{ grid-template-columns: 1fr; } }
+
+  .product-card{
+    background: var(--surface); border:1px solid var(--border); border-radius: 18px;
+    overflow:hidden; display:flex; flex-direction:column; box-shadow: var(--shadow);
+  }
+  .product-media{
+    background: var(--surface-alt);
+    aspect-ratio: 4/3; display:flex; align-items:center; justify-content:center;
+    position:relative;
+  }
+  .product-media svg{ width:56%; height:56%; color: var(--accent); opacity:.85; }
+  .product-media .badge{
+    position:absolute; top:12px; inset-inline-start:12px;
+    background: var(--gold); color:#1A1400; font-size:0.72rem; font-weight:800;
+    padding:4px 10px; border-radius:999px;
+  }
+  .product-body{ padding: 18px 18px 20px; display:flex; flex-direction:column; gap:10px; flex:1; }
+  .product-body h4{ font-size:1rem; color:var(--ink); font-family:"IBM Plex Sans Arabic"; font-weight:700; }
+  .product-body .desc{ font-size:0.85rem; color: var(--ink-muted); flex:1; }
+  .product-foot{ display:flex; align-items:center; justify-content:space-between; margin-top:6px; gap:10px; }
+  .price{ font-weight:800; color: var(--accent-strong); font-variant-numeric: tabular-nums; font-size:1.05rem; }
+  .price small{ font-size:0.7rem; font-weight:600; color:var(--ink-muted); }
+
+  /* offer banner */
+  .offer{
+    background: var(--accent-strong); border-radius: 24px; color:#EFFBF4;
+    padding: 40px; display:flex; align-items:center; justify-content:space-between;
+    gap: 24px; flex-wrap:wrap;
+  }
+  .offer h3{ color:#EFFBF4; font-size:1.4rem; }
+  .offer p{ color: #C9E3D4; margin-top:8px; max-width:52ch; }
+
+  /* testimonials */
+  .testi-grid{ display:grid; grid-template-columns: repeat(3,1fr); gap:20px; }
+  @media (max-width: 900px){ .testi-grid{ grid-template-columns:1fr; } }
+  .testi-card{
+    background: var(--surface); border:1px solid var(--border); border-radius:18px;
+    padding: 24px; box-shadow: var(--shadow);
+  }
+  .testi-card .stars{ color: var(--gold); font-size:0.9rem; letter-spacing:2px; margin-bottom:12px; }
+  .testi-card p.quote{ font-size:0.94rem; color: var(--ink); }
+  .testi-card .who{ margin-top:14px; font-size:0.82rem; color:var(--ink-muted); font-weight:700; }
+
+  /* contact */
+  .contact-wrap{ display:grid; grid-template-columns: 1fr 1fr; gap: 36px; }
+  @media (max-width: 900px){ .contact-wrap{ grid-template-columns:1fr; } }
+  .info-list{ display:flex; flex-direction:column; gap:20px; }
+  .info-row{ display:flex; gap:14px; align-items:flex-start; }
+  .info-row .ic{
+    width:42px; height:42px; border-radius:11px; background: var(--accent-soft);
+    color:var(--accent-strong); display:flex; align-items:center; justify-content:center; flex:none;
+  }
+  .info-row .ic svg{ width:20px; height:20px; }
+  .info-row h4{ font-size:0.95rem; color:var(--ink); font-family:"IBM Plex Sans Arabic"; font-weight:700; }
+  .info-row p{ font-size:0.88rem; color: var(--ink-muted); margin-top:3px; }
+
+  .hours-table{ width:100%; border-collapse:collapse; font-size:0.88rem; }
+  .hours-table td{ padding:7px 0; border-bottom:1px dashed var(--border); }
+  .hours-table td:last-child{ text-align:start; color:var(--ink-muted); font-variant-numeric: tabular-nums; }
+
+  .map-card{
+    background: var(--surface-alt); border:1px solid var(--border); border-radius:18px;
+    padding: 28px; display:flex; flex-direction:column; gap:18px; justify-content:center;
+  }
+  .map-card svg{ width:100%; height:180px; color: var(--accent); }
+
+  /* footer */
+  footer{ border-top:1px solid var(--border); padding: 40px 0 28px; }
+  .foot-row{ display:flex; justify-content:space-between; align-items:center; gap:16px; flex-wrap:wrap; font-size:0.85rem; color: var(--ink-muted); }
+  .foot-brand{ display:flex; align-items:center; gap:9px; }
+  .foot-brand .mark{ width:26px; height:26px; object-fit: contain; border-radius: 8px; }
+  .foot-social{ display:flex; gap:12px; }
+  .foot-social a{ width:36px; height:36px; border-radius:50%; background:var(--surface-alt); display:flex; align-items:center; justify-content:center; border:1px solid var(--border); }
+  .foot-social svg{ width:17px; height:17px; color:var(--accent-strong); }
+
+  /* floating whatsapp */
+  .wa-float{
+    position: fixed; bottom: 22px; left: 22px; z-index: 50;
+    width: 58px; height:58px; border-radius:50%;
+    background: linear-gradient(180deg,#34C77E,#1F9D5F);
+    display:flex; align-items:center; justify-content:center;
+    box-shadow: 0 14px 30px -10px rgba(31,157,95,.7);
+  }
+  .wa-float svg{ width:28px; height:28px; color:#08170F; }
+
+  @media (prefers-reduced-motion: reduce){
+    .btn{ transition:none; }
+  }
+
+  /* ---------- cart ---------- */
+  .cart-btn{
+    position:relative; display:flex; align-items:center; justify-content:center;
+    width:44px; height:44px; border-radius:50%; background:var(--surface-alt);
+    border:1px solid var(--border); color:var(--accent-strong); cursor:pointer; flex:none;
+  }
+  .cart-btn svg{ width:20px; height:20px; }
+  .cart-count{
+    position:absolute; top:-6px; left:-6px;
+    min-width:20px; height:20px; padding:0 5px; border-radius:999px;
+    background: var(--gold); color:#1A1400; font-size:0.7rem; font-weight:800;
+    display:flex; align-items:center; justify-content:center;
+    font-variant-numeric: tabular-nums;
+  }
+  .cart-count[data-empty="true"]{ display:none; }
+
+  .add-cart-btn{ background: var(--accent-soft); color: var(--accent-strong); border-color: var(--border); }
+  .add-cart-btn svg{ width:16px; height:16px; }
+  .add-cart-btn.added{ background: var(--accent); color:#08170F; border-color: var(--accent); }
+
+  .cart-overlay{
+    position: fixed; inset:0; background: rgba(10,20,15,0.45);
+    opacity:0; pointer-events:none; transition: opacity .2s ease; z-index: 90;
+  }
+  .cart-overlay.open{ opacity:1; pointer-events:auto; }
+
+  .cart-drawer{
+    position: fixed; top:0; bottom:0; right:0; z-index:91;
+    width: min(400px, 92vw); background: var(--surface);
+    box-shadow: -18px 0 40px -20px rgba(0,0,0,0.4);
+    display:flex; flex-direction:column;
+    transform: translateX(100%); transition: transform .25s ease;
+  }
+  .cart-drawer.open{ transform: translateX(0); }
+  .cart-head{
+    display:flex; align-items:center; justify-content:space-between;
+    padding: 20px 22px; border-bottom:1px solid var(--border);
+  }
+  .cart-head h3{ font-size:1.15rem; }
+  .cart-close{
+    width:34px; height:34px; border-radius:50%; border:1px solid var(--border);
+    background:var(--surface-alt); display:flex; align-items:center; justify-content:center; cursor:pointer;
+    color: var(--ink-muted);
+  }
+  .cart-close svg{ width:16px; height:16px; }
+
+  .cart-items{ flex:1; overflow-y:auto; padding: 12px 22px; display:flex; flex-direction:column; gap:14px; }
+  .cart-empty{ margin:auto; text-align:center; color: var(--ink-muted); font-size:0.9rem; padding: 40px 10px; }
+  .cart-empty svg{ width:44px; height:44px; margin: 0 auto 14px; color: var(--border); }
+
+  .cart-item{ display:flex; gap:12px; align-items:flex-start; padding: 12px 0; border-bottom:1px solid var(--border); }
+  .cart-item .ci-body{ flex:1; min-width:0; }
+  .cart-item h4{ font-size:0.92rem; color:var(--ink); font-family:"IBM Plex Sans Arabic"; font-weight:700; }
+  .cart-item .ci-price{ font-size:0.82rem; color: var(--ink-muted); margin-top:2px; font-variant-numeric: tabular-nums; }
+  .qty-stepper{ display:flex; align-items:center; gap:10px; margin-top:10px; }
+  .qty-stepper button{
+    width:26px; height:26px; border-radius:50%; border:1px solid var(--border);
+    background: var(--surface-alt); color: var(--accent-strong); font-weight:800; cursor:pointer;
+    display:flex; align-items:center; justify-content:center; font-size:1rem; line-height:1;
+  }
+  .qty-stepper span{ min-width:18px; text-align:center; font-weight:700; font-variant-numeric: tabular-nums; }
+  .ci-remove{
+    background:none; border:none; color: var(--ink-muted); cursor:pointer;
+    padding:4px; border-radius:6px; flex:none;
+  }
+  .ci-remove svg{ width:16px; height:16px; }
+  .ci-remove:hover{ color:#C0392B; }
+  .ci-subtotal{ font-weight:800; color: var(--accent-strong); font-size:0.88rem; white-space:nowrap; font-variant-numeric: tabular-nums; }
+
+  .cart-foot{ border-top:1px solid var(--border); padding: 18px 22px 22px; display:flex; flex-direction:column; gap:14px; }
+  .cart-total-row{ display:flex; align-items:center; justify-content:space-between; font-size:1.05rem; }
+  .cart-total-row .lbl{ color: var(--ink-muted); font-size:0.9rem; }
+  .cart-total-row .val{ font-weight:800; color: var(--accent-strong); font-size:1.3rem; font-variant-numeric: tabular-nums; }
+  .cart-foot .btn{ width:100%; justify-content:center; }
+  .cart-note{ font-size:0.78rem; color: var(--ink-muted); text-align:center; }
+
+  @media (prefers-reduced-motion: reduce){
+    .cart-drawer, .cart-overlay{ transition:none; }
+  }
+</style>
+
+<!-- ===== top strip ===== -->
+<div class="topstrip">
+  <div class="container row">
+    <div class="item">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 8v4l3 3"/><circle cx="12" cy="12" r="9"/></svg>
+      <span>مفتوحة يوميًا 8 صباحًا – 12 منتصف الليل</span>
+    </div>
+    <div class="item">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+      <span>شارع الرشيد، بغداد — مقابل مستشفى الكرخ</span>
+    </div>
+    <div class="item">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.68 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.32 1.85.55 2.81.68A2 2 0 0 1 22 16.92Z"/></svg>
+      <span dir="ltr">+964 780 123 4567</span>
+    </div>
+  </div>
+</div>
+
+<!-- ===== nav ===== -->
+<header class="nav">
+  <div class="container row">
+    <div class="brand">
+      <img class="mark" src="logo.png" alt="زهرة الكفاءات">
+      <div>
+        <div class="name">صيدلية الشفاء</div>
+        <div class="tag">رعاية صحية موثوقة</div>
+      </div>
+    </div>
+    <nav class="links">
+      <a href="#home">الرئيسية</a>
+      <a href="#services">خدماتنا</a>
+      <a href="#products">المنتجات</a>
+      <a href="#reviews">آراء العملاء</a>
+      <a href="#contact">تواصل معنا</a>
+    </nav>
+    <div style="display:flex; align-items:center; gap:12px;">
+      <button class="cart-btn" onclick="openCart()" aria-label="عرض السلة">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 4h2l2.4 12.2A2 2 0 0 0 9.36 18H18a2 2 0 0 0 1.96-1.6L21.5 8H6"/><circle cx="9.5" cy="21" r="1.4" fill="currentColor" stroke="none"/><circle cx="17.5" cy="21" r="1.4" fill="currentColor" stroke="none"/></svg>
+        <span class="cart-count" id="cartCount" data-empty="true">0</span>
+      </button>
+      <a class="btn btn-primary btn-sm" target="_blank" rel="noopener" href="https://wa.me/9647801234567?text=%D9%85%D8%B1%D8%AD%D8%A8%D8%A7%D8%8C%20%D8%A3%D9%88%D8%AF%20%D8%AD%D8%AC%D8%B2%20%D8%A7%D8%B3%D8%AA%D8%B4%D8%A7%D8%B1%D8%A9%20%D9%85%D8%B9%20%D8%A7%D9%84%D8%B5%D9%8A%D8%AF%D9%84%D9%8A%D8%A9">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12.04 2c-5.5 0-9.96 4.46-9.96 9.96 0 1.76.46 3.45 1.32 4.95L2 22l5.24-1.37a9.9 9.9 0 0 0 4.8 1.22h.01c5.5 0 9.96-4.46 9.96-9.96S17.54 2 12.04 2Zm5.8 14.24c-.24.68-1.4 1.3-1.93 1.35-.5.05-1.02.24-3.4-.7-2.87-1.14-4.72-4.05-4.86-4.24-.14-.19-1.16-1.55-1.16-2.96 0-1.4.74-2.09 1-2.38.26-.28.57-.35.76-.35h.55c.18 0 .42-.03.64.5.24.57.8 1.98.87 2.13.07.14.12.31.02.5-.1.19-.15.31-.3.48-.14.17-.31.38-.44.5-.14.14-.3.29-.13.57.17.28.75 1.24 1.62 2.01 1.11.99 2.05 1.3 2.33 1.44.28.14.44.12.6-.07.17-.19.71-.83.9-1.11.19-.28.38-.24.64-.14.26.09 1.66.78 1.94.93.28.14.47.21.53.33.07.12.07.68-.17 1.36Z"/></svg>
+        واتساب
+      </a>
+    </div>
+  </div>
+</header>
+
+<!-- ===== hero ===== -->
+<section class="hero" id="home" style="padding:0;">
+  <div class="container row">
+    <div>
+      <span class="eyebrow">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:14px;height:14px"><path d="m9 12 2 2 4-4"/><circle cx="12" cy="12" r="9"/></svg>
+        صيدلي مجاز على مدار الساعة
+      </span>
+      <h1>صحتك أمانة بين أيدينا</h1>
+      <p class="lede">صيدلية الشفاء تجمع بين الاستشارة الصيدلانية الموثوقة وتوصيل الأدوية والمكملات الغذائية إلى باب بيتك، مع طلب وحجز مباشر عبر واتساب دون تعقيد.</p>
+      <div class="ctas">
+        <a class="btn btn-primary" target="_blank" rel="noopener" href="https://wa.me/9647801234567?text=%D9%85%D8%B1%D8%AD%D8%A8%D8%A7%D8%8C%20%D8%A3%D9%88%D8%AF%20%D8%AD%D8%AC%D8%B2%20%D8%A7%D8%B3%D8%AA%D8%B4%D8%A7%D8%B1%D8%A9%20%D9%85%D8%B9%20%D8%A7%D9%84%D8%B5%D9%8A%D8%AF%D9%84%D9%8A%D8%A9">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12.04 2c-5.5 0-9.96 4.46-9.96 9.96 0 1.76.46 3.45 1.32 4.95L2 22l5.24-1.37a9.9 9.9 0 0 0 4.8 1.22h.01c5.5 0 9.96-4.46 9.96-9.96S17.54 2 12.04 2Zm5.8 14.24c-.24.68-1.4 1.3-1.93 1.35-.5.05-1.02.24-3.4-.7-2.87-1.14-4.72-4.05-4.86-4.24-.14-.19-1.16-1.55-1.16-2.96 0-1.4.74-2.09 1-2.38.26-.28.57-.35.76-.35h.55c.18 0 .42-.03.64.5.24.57.8 1.98.87 2.13.07.14.12.31.02.5-.1.19-.15.31-.3.48-.14.17-.31.38-.44.5-.14.14-.3.29-.13.57.17.28.75 1.24 1.62 2.01 1.11.99 2.05 1.3 2.33 1.44.28.14.44.12.6-.07.17-.19.71-.83.9-1.11.19-.28.38-.24.64-.14.26.09 1.66.78 1.94.93.28.14.47.21.53.33.07.12.07.68-.17 1.36Z"/></svg>
+          احجز استشارة عبر واتساب
+        </a>
+        <a class="btn btn-ghost" href="#products">تصفّح المنتجات</a>
+      </div>
+      <div class="trust">
+        <div class="t"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2 4 5v6c0 5 3.4 9 8 11 4.6-2 8-6 8-11V5l-8-3Z"/></svg>صيدلي مجاز</div>
+        <div class="t"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="7" width="14" height="10" rx="1"/><path d="M15 10h4l3 3v4h-7"/><circle cx="6" cy="19" r="1.6"/><circle cx="18" cy="19" r="1.6"/></svg>توصيل خلال ساعة</div>
+        <div class="t"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 12h4l2-8 4 16 2-8h6"/></svg>استشارة مجانية</div>
+        <div class="t"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg>منتجات أصلية 100٪</div>
+      </div>
+    </div>
+    <div class="hero-art">
+      <svg viewBox="0 0 400 400" fill="none">
+        <circle cx="200" cy="200" r="180" fill="var(--surface)" opacity="0.5"/>
+        <g transform="translate(70,90)">
+          <rect x="0" y="70" width="260" height="150" rx="26" fill="var(--surface)" stroke="var(--border)"/>
+          <rect x="30" y="30" width="200" height="80" rx="18" fill="var(--accent-soft)"/>
+          <circle cx="130" cy="70" r="26" fill="var(--accent)"/>
+          <path d="M118 70h24M130 58v24" stroke="var(--surface)" stroke-width="5" stroke-linecap="round"/>
+          <rect x="30" y="140" width="60" height="18" rx="9" fill="var(--accent-soft)"/>
+          <rect x="100" y="140" width="60" height="18" rx="9" fill="var(--accent-soft)"/>
+          <rect x="170" y="140" width="60" height="18" rx="9" fill="var(--accent-soft)"/>
+          <rect x="30" y="175" width="200" height="10" rx="5" fill="var(--border)"/>
+        </g>
+        <circle cx="90" cy="90" r="10" fill="var(--gold)" opacity="0.8"/>
+        <circle cx="330" cy="120" r="14" fill="var(--accent)" opacity="0.5"/>
+        <circle cx="320" cy="300" r="8" fill="var(--gold)" opacity="0.7"/>
+      </svg>
+    </div>
+  </div>
+</section>
+
+<!-- ===== services ===== -->
+<section id="services">
+  <div class="container">
+    <div class="section-head">
+      <span class="eyebrow">خدماتنا</span>
+      <h2>أكثر من مجرد صرف دواء</h2>
+      <p class="desc">فريقنا من الصيادلة المجازين يرافقك خطوة بخطوة، من الاستشارة الأولى إلى استلام طلبك عند باب بيتك.</p>
+    </div>
+    <div class="services-grid">
+      <div class="service-card">
+        <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12.04 2c-5.5 0-9.96 4.46-9.96 9.96S6.54 22 12.04 22c1.9 0 3.68-.53 5.19-1.46"/><path d="M2 12h4l2-8 4 16 2-8h6"/></svg></div>
+        <h3>استشارة دوائية</h3>
+        <p>شرح واضح لطريقة الاستخدام والجرعات والتداخلات الدوائية، مجانًا عبر واتساب.</p>
+      </div>
+      <div class="service-card">
+        <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="7" width="14" height="10" rx="1"/><path d="M15 10h4l3 3v4h-7"/><circle cx="6" cy="19" r="1.6"/><circle cx="18" cy="19" r="1.6"/></svg></div>
+        <h3>توصيل سريع</h3>
+        <p>نوصل طلبك داخل بغداد خلال ساعة، ولباقي المحافظات خلال يوم عمل واحد.</p>
+      </div>
+      <div class="service-card">
+        <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 12h6M9 16h6M9 8h6"/><rect x="4" y="3" width="16" height="18" rx="2"/></svg></div>
+        <h3>وصفات طبية</h3>
+        <p>ارسل صورة الوصفة عبر واتساب وسنجهزها لك ونؤكد السعر قبل التوصيل.</p>
+      </div>
+      <div class="service-card">
+        <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2 4 5v6c0 5 3.4 9 8 11 4.6-2 8-6 8-11V5l-8-3Z"/><path d="m9 12 2 2 4-4"/></svg></div>
+        <h3>فحوصات أولية</h3>
+        <p>قياس ضغط الدم والسكر مجانًا داخل الصيدلية دون الحاجة لموعد مسبق.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== products ===== -->
+<section id="products" style="background:var(--surface-alt); border-top:1px solid var(--border); border-bottom:1px solid var(--border);">
+  <div class="container">
+    <div class="section-head">
+      <span class="eyebrow">المنتجات</span>
+      <h2>تسوّق أدويتك ومكملاتك</h2>
+      <p class="desc">الأسعار بالدينار العراقي. اضغط «اطلب عبر واتساب» على أي منتج ليصلك تأكيد فوري وموعد توصيل.</p>
+    </div>
+
+    <div class="cat-tabs">
+      <span class="cat-pill active">الكل</span>
+      <span class="cat-pill">أدوية عامة</span>
+      <span class="cat-pill">مكملات غذائية</span>
+      <span class="cat-pill">العناية والتجميل</span>
+    </div>
+
+    <div class="cat-block">
+      <h3>أدوية عامة</h3>
+      <div class="product-grid">
+
+        <div class="product-card">
+          <div class="product-media">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="9" width="18" height="6" rx="3" transform="rotate(-30 12 12)"/><path d="M8.5 15.5 15.5 8.5" stroke-width="1.2"/></svg>
+          </div>
+          <div class="product-body">
+            <h4>باراسيتامول 500 ملغ — علبة 20 قرص</h4>
+            <p class="desc">مسكّن وخافض حرارة للاستخدام اليومي، مناسب للبالغين.</p>
+            <div class="product-foot">
+              <span class="price">1,500<small> د.ع</small></span>
+              <button class="btn add-cart-btn btn-sm" onclick="addToCart(this,'p1','باراسيتامول 500 ملغ — علبة 20 قرص',1500)">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 4h2l2.4 12.2A2 2 0 0 0 9.36 18H18a2 2 0 0 0 1.96-1.6L21.5 8H6"/></svg>
+                أضف للسلة
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div class="product-card">
+          <div class="product-media">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M8 3h8v4l3 3v9a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2v-9l3-3V3Z"/><path d="M9 14h6" stroke-width="1.2"/></svg>
+          </div>
+          <div class="product-body">
+            <h4>شراب سعال للأطفال</h4>
+            <p class="desc">تركيبة لطيفة لتهدئة السعال ونزلات البرد للأطفال فوق سنتين.</p>
+            <div class="product-foot">
+              <span class="price">4,000<small> د.ع</small></span>
+              <button class="btn add-cart-btn btn-sm" onclick="addToCart(this,'p2','شراب سعال للأطفال',4000)">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 4h2l2.4 12.2A2 2 0 0 0 9.36 18H18a2 2 0 0 0 1.96-1.6L21.5 8H6"/></svg>
+                أضف للسلة
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div class="product-card">
+          <div class="product-media">
+            <span class="badge">الأكثر طلبًا</span>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="8"/><path d="M12 9v6M9 12h6" stroke-width="1.2"/></svg>
+          </div>
+          <div class="product-body">
+            <h4>مرهم للحروق والجروح الخفيفة</h4>
+            <p class="desc">يسرّع الالتئام ويحمي من الالتهاب، أنبوب 20 غم.</p>
+            <div class="product-foot">
+              <span class="price">3,000<small> د.ع</small></span>
+              <button class="btn add-cart-btn btn-sm" onclick="addToCart(this,'p3','مرهم للحروق والجروح الخفيفة',3000)">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 4h2l2.4 12.2A2 2 0 0 0 9.36 18H18a2 2 0 0 0 1.96-1.6L21.5 8H6"/></svg>
+                أضف للسلة
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div class="product-card">
+          <div class="product-media">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 4c-4 3-8 6-8 10a8 8 0 0 0 16 0c0-4-4-7-8-10Z"/></svg>
+          </div>
+          <div class="product-body">
+            <h4>قطرة عين مرطبة</h4>
+            <p class="desc">تخفّف جفاف وإجهاد العين الناتج عن الشاشات، 10 مل.</p>
+            <div class="product-foot">
+              <span class="price">5,500<small> د.ع</small></span>
+              <button class="btn add-cart-btn btn-sm" onclick="addToCart(this,'p4','قطرة عين مرطبة',5500)">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 4h2l2.4 12.2A2 2 0 0 0 9.36 18H18a2 2 0 0 0 1.96-1.6L21.5 8H6"/></svg>
+                أضف للسلة
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div class="product-card">
+          <div class="product-media">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 2v6M12 16v6M4.9 4.9l4.2 4.2M14.9 14.9l4.2 4.2M2 12h6M16 12h6M4.9 19.1l4.2-4.2M14.9 9.1l4.2-4.2"/></svg>
+          </div>
+          <div class="product-body">
+            <h4>أقراص لعلاج الحموضة</h4>
+            <p class="desc">تخفف حرقة المعدة وعسر الهضم، علبة 30 قرص مضغ.</p>
+            <div class="product-foot">
+              <span class="price">2,500<small> د.ع</small></span>
+              <button class="btn add-cart-btn btn-sm" onclick="addToCart(this,'p5','أقراص لعلاج الحموضة',2500)">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 4h2l2.4 12.2A2 2 0 0 0 9.36 18H18a2 2 0 0 0 1.96-1.6L21.5 8H6"/></svg>
+                أضف للسلة
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div class="product-card">
+          <div class="product-media">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 3 4 6.5v4c0 5 3.4 9.4 8 10.5 4.6-1.1 8-5.5 8-10.5v-4L12 3Z"/></svg>
+          </div>
+          <div class="product-body">
+            <h4>كمامات طبية — علبة 50 قطعة</h4>
+            <p class="desc">حماية ثلاثية الطبقات معتمدة، مريحة للاستخدام اليومي.</p>
+            <div class="product-foot">
+              <span class="price">6,000<small> د.ع</small></span>
+              <button class="btn add-cart-btn btn-sm" onclick="addToCart(this,'p6','كمامات طبية — علبة 50 قطعة',6000)">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 4h2l2.4 12.2A2 2 0 0 0 9.36 18H18a2 2 0 0 0 1.96-1.6L21.5 8H6"/></svg>
+                أضف للسلة
+              </button>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="cat-block">
+      <h3>مكملات غذائية</h3>
+      <div class="product-grid">
+
+        <div class="product-card">
+          <div class="product-media">
+            <span class="badge">عرض خاص</span>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="9"/><path d="M8 12h8M12 8v8" stroke-width="1.2"/></svg>
+          </div>
+          <div class="product-body">
+            <h4>فيتامين سي فوّار — 20 قرص</h4>
+            <p class="desc">يدعم المناعة، بنكهة البرتقال، للاستخدام اليومي.</p>
+            <div class="product-foot">
+              <span class="price">7,000<small> د.ع</small></span>
+              <button class="btn add-cart-btn btn-sm" onclick="addToCart(this,'p7','فيتامين سي فوّار — 20 قرص',7000)">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 4h2l2.4 12.2A2 2 0 0 0 9.36 18H18a2 2 0 0 0 1.96-1.6L21.5 8H6"/></svg>
+                أضف للسلة
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div class="product-card">
+          <div class="product-media">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 3c3 3 6 5.7 6 9.5A6 6 0 0 1 6 12.5C6 8.7 9 6 12 3Z"/></svg>
+          </div>
+          <div class="product-body">
+            <h4>أوميغا 3 — 60 كبسولة</h4>
+            <p class="desc">زيت سمك نقي يدعم صحة القلب والدماغ.</p>
+            <div class="product-foot">
+              <span class="price">12,000<small> د.ع</small></span>
+              <button class="btn add-cart-btn btn-sm" onclick="addToCart(this,'p8','أوميغا 3 — 60 كبسولة',12000)">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 4h2l2.4 12.2A2 2 0 0 0 9.36 18H18a2 2 0 0 0 1.96-1.6L21.5 8H6"/></svg>
+                أضف للسلة
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div class="product-card">
+          <div class="product-media">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M6 3h12l-1 6H7L6 3Z"/><path d="M7 9c-2 3-2 7 0 9a7 7 0 0 0 10 0c2-2 2-6 0-9" stroke-width="1.3"/></svg>
+          </div>
+          <div class="product-body">
+            <h4>حديد + حمض الفوليك — 30 قرص</h4>
+            <p class="desc">مكمل مناسب لعلاج فقر الدم الخفيف ودعم الحوامل.</p>
+            <div class="product-foot">
+              <span class="price">9,000<small> د.ع</small></span>
+              <button class="btn add-cart-btn btn-sm" onclick="addToCart(this,'p9','حديد + حمض الفوليك — 30 قرص',9000)">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 4h2l2.4 12.2A2 2 0 0 0 9.36 18H18a2 2 0 0 0 1.96-1.6L21.5 8H6"/></svg>
+                أضف للسلة
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div class="product-card">
+          <div class="product-media">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="4"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M4.5 4.5l2 2M17.5 17.5l2 2M19.5 4.5l-2 2M6.5 17.5l-2 2"/></svg>
+          </div>
+          <div class="product-body">
+            <h4>فيتامين D3 — نقط 20 مل</h4>
+            <p class="desc">يدعم صحة العظام والمناعة، مناسب للكبار والأطفال.</p>
+            <div class="product-foot">
+              <span class="price">8,500<small> د.ع</small></span>
+              <button class="btn add-cart-btn btn-sm" onclick="addToCart(this,'p10','فيتامين D3 — نقط 20 مل',8500)">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 4h2l2.4 12.2A2 2 0 0 0 9.36 18H18a2 2 0 0 0 1.96-1.6L21.5 8H6"/></svg>
+                أضف للسلة
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div class="product-card">
+          <div class="product-media">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="4" y="4" width="16" height="16" rx="8"/><path d="M9 12h6M12 9v6" stroke-width="1.2"/></svg>
+          </div>
+          <div class="product-body">
+            <h4>بروبيوتيك للجهاز الهضمي — 30 كبسولة</h4>
+            <p class="desc">يوازن البكتيريا النافعة ويحسّن الهضم العام.</p>
+            <div class="product-foot">
+              <span class="price">11,000<small> د.ع</small></span>
+              <button class="btn add-cart-btn btn-sm" onclick="addToCart(this,'p11','بروبيوتيك للجهاز الهضمي — 30 كبسولة',11000)">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 4h2l2.4 12.2A2 2 0 0 0 9.36 18H18a2 2 0 0 0 1.96-1.6L21.5 8H6"/></svg>
+                أضف للسلة
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div class="product-card">
+          <div class="product-media">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 2C9 5 6 8.5 6 13a6 6 0 0 0 12 0c0-4.5-3-8-6-11Z"/></svg>
+          </div>
+          <div class="product-body">
+            <h4>زنك + فيتامين سي — 30 قرص</h4>
+            <p class="desc">دعم مناعي مزدوج، مناسب في مواسم التغيرات الجوية.</p>
+            <div class="product-foot">
+              <span class="price">7,500<small> د.ع</small></span>
+              <button class="btn add-cart-btn btn-sm" onclick="addToCart(this,'p12','زنك + فيتامين سي — 30 قرص',7500)">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 4h2l2.4 12.2A2 2 0 0 0 9.36 18H18a2 2 0 0 0 1.96-1.6L21.5 8H6"/></svg>
+                أضف للسلة
+              </button>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="offer">
+      <div>
+        <h3>توصيل مجاني للطلبات فوق 25,000 د.ع</h3>
+        <p>اجمع أكثر من منتج في طلب واحد عبر واتساب واحصل على توصيل مجاني داخل بغداد.</p>
+      </div>
+      <button class="btn btn-primary" onclick="openCart()">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 4h2l2.4 12.2A2 2 0 0 0 9.36 18H18a2 2 0 0 0 1.96-1.6L21.5 8H6"/></svg>
+        ابدأ طلبك الآن
+      </button>
+    </div>
+  </div>
+</section>
+
+<!-- ===== testimonials ===== -->
+<section id="reviews">
+  <div class="container">
+    <div class="section-head">
+      <span class="eyebrow">آراء العملاء</span>
+      <h2>ثقة عملائنا هي معيار عملنا</h2>
+    </div>
+    <div class="testi-grid">
+      <div class="testi-card">
+        <div class="stars">★★★★★</div>
+        <p class="quote">"طلبت أدوية والدتي عبر واتساب ووصلت خلال أقل من ساعة، والصيدلاني شرحلي طريقة الاستخدام بالتفصيل."</p>
+        <div class="who">— أم حسين، الكرادة</div>
+      </div>
+      <div class="testi-card">
+        <div class="stars">★★★★★</div>
+        <p class="quote">"أسعار واضحة وما في أي مفاجآت، وتوصيل المكملات دائمًا بالوقت المحدد."</p>
+        <div class="who">— علي كريم، الجادرية</div>
+      </div>
+      <div class="testi-card">
+        <div class="stars">★★★★★</div>
+        <p class="quote">"استشارة سريعة عبر واتساب وفرت علي وقت الذهاب للصيدلية، وخدمة محترمة جدًا."</p>
+        <div class="who">— زينب علاء، المنصور</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== contact ===== -->
+<section id="contact" style="background:var(--surface-alt); border-top:1px solid var(--border);">
+  <div class="container">
+    <div class="section-head">
+      <span class="eyebrow">تواصل معنا</span>
+      <h2>احجز أو اطلب في دقيقة واحدة</h2>
+      <p class="desc">كل الحجوزات والطلبات تتم عبر واتساب مباشرة — بدون تسجيل حساب وبدون انتظار.</p>
+    </div>
+    <div class="contact-wrap">
+      <div class="info-list">
+        <div class="info-row">
+          <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg></div>
+          <div><h4>العنوان</h4><p>شارع الرشيد، بغداد — مقابل مستشفى الكرخ العام</p></div>
+        </div>
+        <div class="info-row">
+          <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.68 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.32 1.85.55 2.81.68A2 2 0 0 1 22 16.92Z"/></svg></div>
+          <div><h4>واتساب وهاتف</h4><p dir="ltr">+964 780 123 4567</p></div>
+        </div>
+        <div class="info-row">
+          <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></svg></div>
+          <div>
+            <h4>ساعات العمل</h4>
+            <table class="hours-table">
+              <tr><td>السبت – الخميس</td><td>8:00 ص – 12:00 ص</td></tr>
+              <tr><td>الجمعة</td><td>4:00 م – 12:00 ص</td></tr>
+            </table>
+          </div>
+        </div>
+        <a class="btn btn-primary" style="align-self:flex-start" target="_blank" rel="noopener" href="https://wa.me/9647801234567?text=%D9%85%D8%B1%D8%AD%D8%A8%D8%A7%D8%8C%20%D8%A3%D9%88%D8%AF%20%D8%A7%D9%84%D8%AA%D9%88%D8%A7%D8%B5%D9%84%20%D9%85%D8%B9%20%D8%B5%D9%8A%D8%AF%D9%84%D9%8A%D8%A9%20%D8%A7%D9%84%D8%B4%D9%81%D8%A7%D8%A1">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12.04 2c-5.5 0-9.96 4.46-9.96 9.96 0 1.76.46 3.45 1.32 4.95L2 22l5.24-1.37a9.9 9.9 0 0 0 4.8 1.22h.01c5.5 0 9.96-4.46 9.96-9.96S17.54 2 12.04 2Zm5.8 14.24c-.24.68-1.4 1.3-1.93 1.35-.5.05-1.02.24-3.4-.7-2.87-1.14-4.72-4.05-4.86-4.24-.14-.19-1.16-1.55-1.16-2.96 0-1.4.74-2.09 1-2.38.26-.28.57-.35.76-.35h.55c.18 0 .42-.03.64.5.24.57.8 1.98.87 2.13.07.14.12.31.02.5-.1.19-.15.31-.3.48-.14.17-.31.38-.44.5-.14.14-.3.29-.13.57.17.28.75 1.24 1.62 2.01 1.11.99 2.05 1.3 2.33 1.44.28.14.44.12.6-.07.17-.19.71-.83.9-1.11.19-.28.38-.24.64-.14.26.09 1.66.78 1.94.93.28.14.47.21.53.33.07.12.07.68-.17 1.36Z"/></svg>
+          راسلنا الآن
+        </a>
+      </div>
+      <div class="map-card">
+        <svg viewBox="0 0 200 120" fill="none">
+          <path d="M10 100 Q40 40 80 80 T160 30" stroke="var(--border)" stroke-width="6" stroke-linecap="round"/>
+          <path d="M10 60 Q60 90 110 50 T190 90" stroke="var(--border)" stroke-width="6" stroke-linecap="round"/>
+          <circle cx="120" cy="55" r="10" fill="var(--accent)"/>
+          <path d="M120 55v-14" stroke="var(--accent)" stroke-width="4" stroke-linecap="round"/>
+        </svg>
+        <div>
+          <h4 style="font-size:1rem;color:var(--ink);font-family:'IBM Plex Sans Arabic';font-weight:700;">موقعنا في بغداد</h4>
+          <p style="font-size:0.85rem;color:var(--ink-muted);margin-top:6px;">شارع الرشيد، مقابل مستشفى الكرخ العام — يتوفر موقف سيارات خاص للزبائن.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== footer ===== -->
+<footer>
+  <div class="container foot-row">
+    <div class="foot-brand">
+      <img class="mark" src="logo.png" alt="زهرة الكفاءات">
+      <span>© 2026 صيدلية الشفاء. جميع الحقوق محفوظة.</span>
+    </div>
+    <div class="foot-social">
+      <a href="#" aria-label="فيسبوك"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M13.5 21v-7.5H16l.5-3H13.5V8.3c0-.87.24-1.46 1.5-1.46H16.6V4.2C16.3 4.16 15.3 4.07 14.13 4.07c-2.4 0-4.05 1.47-4.05 4.16v2.32H7.6v3H10.08V21h3.42Z"/></svg></a>
+      <a href="#" aria-label="انستغرام"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.2" cy="6.8" r="1"/></svg></a>
+      <a href="https://wa.me/9647801234567" target="_blank" rel="noopener" aria-label="واتساب"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12.04 2c-5.5 0-9.96 4.46-9.96 9.96 0 1.76.46 3.45 1.32 4.95L2 22l5.24-1.37a9.9 9.9 0 0 0 4.8 1.22h.01c5.5 0 9.96-4.46 9.96-9.96S17.54 2 12.04 2Z"/></svg></a>
+    </div>
+  </div>
+</footer>
+
+<a class="wa-float" target="_blank" rel="noopener" href="https://wa.me/9647801234567?text=%D9%85%D8%B1%D8%AD%D8%A8%D8%A7%D8%8C%20%D8%A3%D8%AD%D8%AA%D8%A7%D8%AC%20%D9%85%D8%B3%D8%A7%D8%B9%D8%AF%D8%A9" aria-label="تواصل عبر واتساب">
+  <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12.04 2c-5.5 0-9.96 4.46-9.96 9.96 0 1.76.46 3.45 1.32 4.95L2 22l5.24-1.37a9.9 9.9 0 0 0 4.8 1.22h.01c5.5 0 9.96-4.46 9.96-9.96S17.54 2 12.04 2Zm5.8 14.24c-.24.68-1.4 1.3-1.93 1.35-.5.05-1.02.24-3.4-.7-2.87-1.14-4.72-4.05-4.86-4.24-.14-.19-1.16-1.55-1.16-2.96 0-1.4.74-2.09 1-2.38.26-.28.57-.35.76-.35h.55c.18 0 .42-.03.64.5.24.57.8 1.98.87 2.13.07.14.12.31.02.5-.1.19-.15.31-.3.48-.14.17-.31.38-.44.5-.14.14-.3.29-.13.57.17.28.75 1.24 1.62 2.01 1.11.99 2.05 1.3 2.33 1.44.28.14.44.12.6-.07.17-.19.71-.83.9-1.11.19-.28.38-.24.64-.14.26.09 1.66.78 1.94.93.28.14.47.21.53.33.07.12.07.68-.17 1.36Z"/></svg>
+</a>
+
+<!-- ===== cart drawer ===== -->
+<div class="cart-overlay" id="cartOverlay" onclick="closeCart()"></div>
+<aside class="cart-drawer" id="cartDrawer" aria-label="سلة الطلبات">
+  <div class="cart-head">
+    <h3>سلة طلباتك</h3>
+    <button class="cart-close" onclick="closeCart()" aria-label="إغلاق السلة">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6 6 18M6 6l12 12"/></svg>
+    </button>
+  </div>
+  <div class="cart-items" id="cartItems">
+    <div class="cart-empty" id="cartEmptyMsg">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 4h2l2.4 12.2A2 2 0 0 0 9.36 18H18a2 2 0 0 0 1.96-1.6L21.5 8H6"/><circle cx="9.5" cy="21" r="1.4" fill="currentColor" stroke="none"/><circle cx="17.5" cy="21" r="1.4" fill="currentColor" stroke="none"/></svg>
+      سلتك فارغة حاليًا.<br>أضف منتجات من قسم «المنتجات» لتبدأ طلبك.
+    </div>
+  </div>
+  <div class="cart-foot">
+    <div class="cart-total-row">
+      <span class="lbl">المجموع الكلي</span>
+      <span class="val"><span id="cartTotal">0</span> د.ع</span>
+    </div>
+    <button class="btn btn-primary" id="sendCartBtn" onclick="sendCartToWhatsApp()" disabled>
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12.04 2c-5.5 0-9.96 4.46-9.96 9.96 0 1.76.46 3.45 1.32 4.95L2 22l5.24-1.37a9.9 9.9 0 0 0 4.8 1.22h.01c5.5 0 9.96-4.46 9.96-9.96S17.54 2 12.04 2Zm5.8 14.24c-.24.68-1.4 1.3-1.93 1.35-.5.05-1.02.24-3.4-.7-2.87-1.14-4.72-4.05-4.86-4.24-.14-.19-1.16-1.55-1.16-2.96 0-1.4.74-2.09 1-2.38.26-.28.57-.35.76-.35h.55c.18 0 .42-.03.64.5.24.57.8 1.98.87 2.13.07.14.12.31.02.5-.1.19-.15.31-.3.48-.14.17-.31.38-.44.5-.14.14-.3.29-.13.57.17.28.75 1.24 1.62 2.01 1.11.99 2.05 1.3 2.33 1.44.28.14.44.12.6-.07.17-.19.71-.83.9-1.11.19-.28.38-.24.64-.14.26.09 1.66.78 1.94.93.28.14.47.21.53.33.07.12.07.68-.17 1.36Z"/></svg>
+      إرسال الطلب عبر واتساب
+    </button>
+    <p class="cart-note">سيُفتح واتساب مع تفاصيل طلبك جاهزة — أكّد معنا العنوان وطريقة الدفع هناك.</p>
+  </div>
+</aside>
+
+<script>
+  var CART = {};
+  var WA_NUMBER = "9647801234567";
+
+  function formatNum(n){
+    return n.toLocaleString("en-US");
+  }
+
+  function addToCart(btnEl, id, name, price){
+    if(!CART[id]){ CART[id] = { name: name, price: price, qty: 0 }; }
+    CART[id].qty += 1;
+    renderCart();
+    openCart();
+    if(btnEl){
+      btnEl.classList.add("added");
+      var original = btnEl.innerHTML;
+      btnEl.innerHTML = "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\"><path d=\"M20 6 9 17l-5-5\"/></svg> أُضيف";
+      setTimeout(function(){
+        btnEl.classList.remove("added");
+        btnEl.innerHTML = original;
+      }, 1100);
+    }
+  }
+
+  function changeQty(id, delta){
+    if(!CART[id]) return;
+    CART[id].qty += delta;
+    if(CART[id].qty <= 0){ delete CART[id]; }
+    renderCart();
+  }
+
+  function removeItem(id){
+    delete CART[id];
+    renderCart();
+  }
+
+  function renderCart(){
+    var itemsEl = document.getElementById("cartItems");
+    var ids = Object.keys(CART);
+    var total = 0;
+    var count = 0;
+
+    if(ids.length === 0){
+      itemsEl.innerHTML = '<div class="cart-empty" id="cartEmptyMsg">' +
+        '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 4h2l2.4 12.2A2 2 0 0 0 9.36 18H18a2 2 0 0 0 1.96-1.6L21.5 8H6"/><circle cx="9.5" cy="21" r="1.4" fill="currentColor" stroke="none"/><circle cx="17.5" cy="21" r="1.4" fill="currentColor" stroke="none"/></svg>' +
+        'سلتك فارغة حاليًا.<br>أضف منتجات من قسم «المنتجات» لتبدأ طلبك.</div>';
+    } else {
+      var html = "";
+      ids.forEach(function(id){
+        var item = CART[id];
+        var subtotal = item.price * item.qty;
+        total += subtotal;
+        count += item.qty;
+        html += '<div class="cart-item">' +
+          '<div class="ci-body">' +
+            '<h4>' + item.name + '</h4>' +
+            '<div class="ci-price">' + formatNum(item.price) + ' د.ع للقطعة</div>' +
+            '<div class="qty-stepper">' +
+              '<button onclick="changeQty(\'' + id + '\',-1)" aria-label="إنقاص الكمية">−</button>' +
+              '<span>' + item.qty + '</span>' +
+              '<button onclick="changeQty(\'' + id + '\',1)" aria-label="زيادة الكمية">+</button>' +
+            '</div>' +
+          '</div>' +
+          '<div style="display:flex;flex-direction:column;align-items:flex-end;gap:10px;">' +
+            '<button class="ci-remove" onclick="removeItem(\'' + id + '\')" aria-label="حذف المنتج">' +
+              '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18M8 6V4h8v2M6 6l1 14h10l1-14"/></svg>' +
+            '</button>' +
+            '<span class="ci-subtotal">' + formatNum(subtotal) + '</span>' +
+          '</div>' +
+        '</div>';
+      });
+      itemsEl.innerHTML = html;
+    }
+
+    document.getElementById("cartTotal").textContent = formatNum(total);
+    var countEl = document.getElementById("cartCount");
+    countEl.textContent = count;
+    countEl.setAttribute("data-empty", count === 0 ? "true" : "false");
+    document.getElementById("sendCartBtn").disabled = ids.length === 0;
+  }
+
+  function openCart(){
+    document.getElementById("cartDrawer").classList.add("open");
+    document.getElementById("cartOverlay").classList.add("open");
+    document.body.style.overflow = "hidden";
+  }
+
+  function closeCart(){
+    document.getElementById("cartDrawer").classList.remove("open");
+    document.getElementById("cartOverlay").classList.remove("open");
+    document.body.style.overflow = "";
+  }
+
+  function sendCartToWhatsApp(){
+    var ids = Object.keys(CART);
+    if(ids.length === 0) return;
+    var lines = ["مرحباً، أريد تأكيد الطلب التالي من صيدلية الشفاء:", ""];
+    var total = 0;
+    var i = 1;
+    ids.forEach(function(id){
+      var item = CART[id];
+      var subtotal = item.price * item.qty;
+      total += subtotal;
+      lines.push(i + ") " + item.name + " × " + item.qty + " = " + formatNum(subtotal) + " د.ع");
+      i++;
+    });
+    lines.push("");
+    lines.push("المجموع الكلي: " + formatNum(total) + " د.ع");
+    lines.push("");
+    lines.push("الاسم: ");
+    lines.push("العنوان: ");
+    var text = encodeURIComponent(lines.join("\n"));
+    window.open("https://wa.me/" + WA_NUMBER + "?text=" + text, "_blank");
+  }
+</script>
+
+</div>
