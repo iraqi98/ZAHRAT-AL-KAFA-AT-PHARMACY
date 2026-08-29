@@ -159,6 +159,8 @@
     padding: 6px 14px; border-radius: 999px; margin-bottom: 18px;
   }
   .hero h1{ font-size: clamp(1.9rem, 3.4vw, 2.85rem); line-height:1.28; }
+  #heroTitle{ transition: opacity .4s ease; }
+  #heroTitle.fade{ opacity: 0; }
   .hero .lede{ margin-top:16px; font-size:1.08rem; color: var(--ink-muted); max-width: 46ch; }
   .hero .ctas{ display:flex; gap:14px; margin-top: 30px; flex-wrap:wrap; }
   .hero .trust{ display:flex; gap:26px; margin-top:38px; flex-wrap:wrap; }
@@ -450,7 +452,7 @@
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:14px;height:14px"><path d="m9 12 2 2 4-4"/><circle cx="12" cy="12" r="9"/></svg>
         صيدلي مجاز على مدار الساعة
       </span>
-      <h1>صحتك أمانة بين أيدينا</h1>
+      <h1 id="heroTitle">صحتك أمانة بين أيدينا</h1>
       <p class="lede">صيدلية زهرة الكفاءات تجمع بين الاستشارة الصيدلانية الموثوقة وتوصيل الأدوية والمكملات الغذائية إلى باب بيتك، مع طلب وحجز مباشر عبر واتساب دون تعقيد.</p>
       <div class="ctas">
         <a class="btn btn-primary" target="_blank" rel="noopener" href="https://wa.me/9647801234567?text=%D9%85%D8%B1%D8%AD%D8%A8%D8%A7%D8%8C%20%D8%A3%D9%88%D8%AF%20%D8%AD%D8%AC%D8%B2%20%D8%A7%D8%B3%D8%AA%D8%B4%D8%A7%D8%B1%D8%A9%20%D9%85%D8%B9%20%D8%A7%D9%84%D8%B5%D9%8A%D8%AF%D9%84%D9%8A%D8%A9">
@@ -1056,6 +1058,30 @@
     document.getElementById("mobileMenu").classList.remove("open");
     document.getElementById("navToggleBtn").setAttribute("aria-expanded", "false");
   }
+
+  var heroPhrases = [
+    "صحتك أمانة بين أيدينا",
+    "دواؤك يصل لباب بيتك بثقة",
+    "استشارة صيدلانية موثوقة على مدار الساعة",
+    "رعاية صحية بلمسة إنسانية",
+    "جودة وأصالة في كل منتج",
+    "صيدليتك القريبة منك أينما كنت",
+    "خدمتك أولويتنا دائمًا",
+    "من قلب بغداد نحو صحتك",
+    "سرعة في التوصيل، دقة في الوصفة",
+    "نهتم بصحتك كما تهتم أنت بها"
+  ];
+  var heroIndex = 0;
+  setInterval(function(){
+    var el = document.getElementById("heroTitle");
+    if(!el) return;
+    el.classList.add("fade");
+    setTimeout(function(){
+      heroIndex = (heroIndex + 1) % heroPhrases.length;
+      el.textContent = heroPhrases[heroIndex];
+      el.classList.remove("fade");
+    }, 400);
+  }, 5000);
 
   function filterCategory(cat, btnEl){
     document.querySelectorAll(".cat-pill").forEach(function(p){ p.classList.remove("active"); });
