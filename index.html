@@ -197,6 +197,7 @@
   .service-card p{ color: var(--ink-muted); font-size:0.92rem; }
 
   /* products */
+  .product-card.search-hidden{ display:none; }
   .cat-tabs{ display:flex; gap:10px; margin-bottom:30px; flex-wrap:wrap; }
   .cat-pill{
     padding: 9px 18px; border-radius:999px; font-size:0.88rem; font-weight:700;
@@ -516,6 +517,11 @@
       <span class="eyebrow">المنتجات</span>
       <h2>تسوّق أدويتك ومكملاتك</h2>
       <p class="desc">الأسعار بالدينار العراقي. اضغط «اطلب عبر واتساب» على أي منتج ليصلك تأكيد فوري وموعد توصيل.</p>
+    </div>
+
+    <div style="margin-bottom:16px;">
+      <input type="text" id="productSearch" placeholder="ابحث عن منتج بالاسم..." oninput="searchProducts(this.value)"
+        style="width:100%; padding:12px 16px; border-radius:12px; border:1px solid var(--border); font-family:inherit; font-size:15px; background:var(--surface); color:inherit;">
     </div>
 
     <div class="cat-tabs">
@@ -1321,11 +1327,43 @@
   }, 5000);
 
   function filterCategory(cat, btnEl){
+    var searchBox = document.getElementById("productSearch");
+    if(searchBox) searchBox.value = "";
+    document.querySelectorAll(".product-card").forEach(function(c){ c.classList.remove("search-hidden"); });
     document.querySelectorAll(".cat-pill").forEach(function(p){ p.classList.remove("active"); });
     if(btnEl){ btnEl.classList.add("active"); }
     document.querySelectorAll(".cat-block").forEach(function(block){
       var show = cat === "all" || block.getAttribute("data-cat") === cat;
       block.classList.toggle("is-hidden", !show);
+    });
+  }
+
+  function searchProducts(query){
+    query = query.trim().toLowerCase();
+    var cards = document.querySelectorAll(".product-card");
+    if(query === ""){
+      var activeBtn = document.querySelector(".cat-pill.active");
+      var activeCat = activeBtn ? activeBtn.getAttribute("data-cat") : "all";
+      filterCategory(activeCat, activeBtn);
+      cards.forEach(function(c){ c.classList.remove("search-hidden"); });
+      return;
+    }
+    document.querySelectorAll(".cat-block").forEach(function(block){ block.classList.remove("is-hidden"); });
+    document.querySelectorAll(".cat-pill").forEach(function(p){ p.classList.remove("active"); });
+    var anyVisibleInBlock = {};
+    cards.forEach(function(card){
+      var name = card.querySelector("h4") ? card.querySelector("h4").textContent.toLowerCase() : "";
+      var match = name.indexOf(query) !== -1;
+      card.classList.toggle("search-hidden", !match);
+      var block = card.closest(".cat-block");
+      if(block){
+        var key = block.getAttribute("data-cat");
+        if(match) anyVisibleInBlock[key] = true;
+      }
+    });
+    document.querySelectorAll(".cat-block").forEach(function(block){
+      var key = block.getAttribute("data-cat");
+      block.classList.toggle("is-hidden", !anyVisibleInBlock[key]);
     });
   }
 
