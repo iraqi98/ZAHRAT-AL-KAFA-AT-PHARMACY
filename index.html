@@ -57,6 +57,7 @@
     font-family: "IBM Plex Sans Arabic", "Segoe UI", Tahoma, sans-serif;
     line-height: 1.75;
     -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
   }
   h1,h2,h3,h4{
     font-family: "Noto Kufi Arabic", "IBM Plex Sans Arabic", sans-serif;
@@ -94,7 +95,26 @@
   nav.links a{ text-decoration:none; color:var(--ink); position:relative; padding: 4px 0; }
   nav.links a:hover{ color: var(--accent); }
   nav.links a:focus-visible, .btn:focus-visible, a:focus-visible{ outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 4px; }
-  @media (max-width: 860px){ nav.links{ display:none; } }
+
+  .nav-toggle{
+    display:none; align-items:center; justify-content:center;
+    width:42px; height:42px; border-radius:12px; flex:none;
+    border:1px solid var(--border); background:var(--surface-alt);
+    color:var(--accent-strong); cursor:pointer;
+  }
+  .nav-toggle svg{ width:22px; height:22px; }
+  .mobile-menu{ display:none; flex-direction:column; gap:2px; padding: 8px 0 16px; }
+  .mobile-menu.open{ display:flex; }
+  .mobile-menu a{
+    text-decoration:none; color:var(--ink); font-weight:600; font-size:0.95rem;
+    padding: 12px 6px; border-top:1px solid var(--border);
+  }
+  .mobile-menu a:hover{ color: var(--accent); }
+
+  @media (max-width: 768px){
+    nav.links{ display:none; }
+    .nav-toggle{ display:flex; }
+  }
 
   .btn{
     display:inline-flex; align-items:center; gap:9px;
@@ -351,35 +371,75 @@
   @media (prefers-reduced-motion: reduce){
     .cart-drawer, .cart-overlay{ transition:none; }
   }
+
+  /* ---------- mobile refinements ---------- */
+  @media (max-width: 768px){
+    section{ padding: 52px 0; }
+    .hero .row{ padding: 32px 0; }
+    .offer{ padding: 28px; }
+    .contact-wrap{ gap: 28px; }
+  }
+
+  @media (max-width: 480px){
+    .container{ padding: 0 16px; }
+
+    .hero h1{ font-size: 1.7rem; }
+    .hero .ctas{ flex-direction:column; align-items:stretch; }
+    .hero .ctas .btn{ width:100%; justify-content:center; }
+    .hero .trust{ gap:14px 20px; }
+
+    .btn{ padding: 11px 18px; font-size:0.9rem; }
+
+    .cat-tabs{ gap:8px; }
+    .cat-pill{ padding: 8px 14px; font-size:0.82rem; }
+
+    .offer{ flex-direction:column; align-items:stretch; text-align:center; }
+    .offer .btn{ width:100%; justify-content:center; }
+
+    .foot-row{ flex-direction:column; align-items:flex-start; gap:16px; }
+    .foot-social{ align-self:flex-start; }
+  }
 </style>
 
 <!-- ===== nav ===== -->
 <header class="nav">
-  <div class="container row">
-    <div class="brand">
-      <img class="mark" src="logo.png" alt="زهرة الكفاءات">
-      <div>
-        <div class="name">صيدلية زهرة الكفاءات</div>
-        <div class="tag">رعاية صحية موثوقة</div>
+  <div class="container">
+    <div class="row">
+      <div class="brand">
+        <img class="mark" src="logo.png" alt="زهرة الكفاءات">
+        <div>
+          <div class="name">صيدلية زهرة الكفاءات</div>
+          <div class="tag">رعاية صحية موثوقة</div>
+        </div>
+      </div>
+      <nav class="links">
+        <a href="#home">الرئيسية</a>
+        <a href="#services">خدماتنا</a>
+        <a href="#products">المنتجات</a>
+        <a href="#reviews">آراء العملاء</a>
+        <a href="#contact">تواصل معنا</a>
+      </nav>
+      <div style="display:flex; align-items:center; gap:12px;">
+        <button class="cart-btn" onclick="openCart()" aria-label="عرض السلة">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 4h2l2.4 12.2A2 2 0 0 0 9.36 18H18a2 2 0 0 0 1.96-1.6L21.5 8H6"/><circle cx="9.5" cy="21" r="1.4" fill="currentColor" stroke="none"/><circle cx="17.5" cy="21" r="1.4" fill="currentColor" stroke="none"/></svg>
+          <span class="cart-count" id="cartCount" data-empty="true">0</span>
+        </button>
+        <a class="btn btn-primary btn-sm" target="_blank" rel="noopener" href="https://wa.me/9647801234567?text=%D9%85%D8%B1%D8%AD%D8%A8%D8%A7%D8%8C%20%D8%A3%D9%88%D8%AF%20%D8%AD%D8%AC%D8%B2%20%D8%A7%D8%B3%D8%AA%D8%B4%D8%A7%D8%B1%D8%A9%20%D9%85%D8%B9%20%D8%A7%D9%84%D8%B5%D9%8A%D8%AF%D9%84%D9%8A%D8%A9">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12.04 2c-5.5 0-9.96 4.46-9.96 9.96 0 1.76.46 3.45 1.32 4.95L2 22l5.24-1.37a9.9 9.9 0 0 0 4.8 1.22h.01c5.5 0 9.96-4.46 9.96-9.96S17.54 2 12.04 2Zm5.8 14.24c-.24.68-1.4 1.3-1.93 1.35-.5.05-1.02.24-3.4-.7-2.87-1.14-4.72-4.05-4.86-4.24-.14-.19-1.16-1.55-1.16-2.96 0-1.4.74-2.09 1-2.38.26-.28.57-.35.76-.35h.55c.18 0 .42-.03.64.5.24.57.8 1.98.87 2.13.07.14.12.31.02.5-.1.19-.15.31-.3.48-.14.17-.31.38-.44.5-.14.14-.3.29-.13.57.17.28.75 1.24 1.62 2.01 1.11.99 2.05 1.3 2.33 1.44.28.14.44.12.6-.07.17-.19.71-.83.9-1.11.19-.28.38-.24.64-.14.26.09 1.66.78 1.94.93.28.14.47.21.53.33.07.12.07.68-.17 1.36Z"/></svg>
+          واتساب
+        </a>
+        <button class="nav-toggle" id="navToggleBtn" onclick="toggleMobileMenu()" aria-label="فتح القائمة" aria-expanded="false">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+        </button>
       </div>
     </div>
-    <nav class="links">
-      <a href="#home">الرئيسية</a>
-      <a href="#services">خدماتنا</a>
-      <a href="#products">المنتجات</a>
-      <a href="#reviews">آراء العملاء</a>
-      <a href="#contact">تواصل معنا</a>
+    <nav class="mobile-menu" id="mobileMenu">
+      <a href="#home" onclick="closeMobileMenu()">الرئيسية</a>
+      <a href="#services" onclick="closeMobileMenu()">خدماتنا</a>
+      <a href="#products" onclick="closeMobileMenu()">المنتجات</a>
+      <a href="#reviews" onclick="closeMobileMenu()">آراء العملاء</a>
+      <a href="#contact" onclick="closeMobileMenu()">تواصل معنا</a>
     </nav>
-    <div style="display:flex; align-items:center; gap:12px;">
-      <button class="cart-btn" onclick="openCart()" aria-label="عرض السلة">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 4h2l2.4 12.2A2 2 0 0 0 9.36 18H18a2 2 0 0 0 1.96-1.6L21.5 8H6"/><circle cx="9.5" cy="21" r="1.4" fill="currentColor" stroke="none"/><circle cx="17.5" cy="21" r="1.4" fill="currentColor" stroke="none"/></svg>
-        <span class="cart-count" id="cartCount" data-empty="true">0</span>
-      </button>
-      <a class="btn btn-primary btn-sm" target="_blank" rel="noopener" href="https://wa.me/9647801234567?text=%D9%85%D8%B1%D8%AD%D8%A8%D8%A7%D8%8C%20%D8%A3%D9%88%D8%AF%20%D8%AD%D8%AC%D8%B2%20%D8%A7%D8%B3%D8%AA%D8%B4%D8%A7%D8%B1%D8%A9%20%D9%85%D8%B9%20%D8%A7%D9%84%D8%B5%D9%8A%D8%AF%D9%84%D9%8A%D8%A9">
-        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12.04 2c-5.5 0-9.96 4.46-9.96 9.96 0 1.76.46 3.45 1.32 4.95L2 22l5.24-1.37a9.9 9.9 0 0 0 4.8 1.22h.01c5.5 0 9.96-4.46 9.96-9.96S17.54 2 12.04 2Zm5.8 14.24c-.24.68-1.4 1.3-1.93 1.35-.5.05-1.02.24-3.4-.7-2.87-1.14-4.72-4.05-4.86-4.24-.14-.19-1.16-1.55-1.16-2.96 0-1.4.74-2.09 1-2.38.26-.28.57-.35.76-.35h.55c.18 0 .42-.03.64.5.24.57.8 1.98.87 2.13.07.14.12.31.02.5-.1.19-.15.31-.3.48-.14.17-.31.38-.44.5-.14.14-.3.29-.13.57.17.28.75 1.24 1.62 2.01 1.11.99 2.05 1.3 2.33 1.44.28.14.44.12.6-.07.17-.19.71-.83.9-1.11.19-.28.38-.24.64-.14.26.09 1.66.78 1.94.93.28.14.47.21.53.33.07.12.07.68-.17 1.36Z"/></svg>
-        واتساب
-      </a>
-    </div>
   </div>
 </header>
 
@@ -408,8 +468,8 @@
       </div>
     </div>
     <div class="hero-art" style="position:relative; display:flex; align-items:center; justify-content:center;">
-      <div style="width:340px; height:340px; max-width:80%; border-radius:50%; background:var(--surface); box-shadow: 0 30px 60px -30px rgba(20,39,32,0.25); display:flex; align-items:center; justify-content:center; overflow:hidden;">
-        <img src="hero-image.png" alt="صيدلية زهرة الكفاءات" style="width:100%; height:100%; object-fit:cover; border-radius:50%;">
+      <div style="width:340px; height:340px; max-width:80%; border-radius:24px; background:var(--surface); box-shadow: 0 30px 60px -30px rgba(20,39,32,0.25); display:flex; align-items:center; justify-content:center; overflow:hidden;">
+        <img src="hero-image.png" alt="صيدلية زهرة الكفاءات" style="width:100%; height:100%; object-fit:contain;">
       </div>
     </div>
   </div>
@@ -984,6 +1044,18 @@
         btnEl.innerHTML = original;
       }, 1100);
     }
+  }
+
+  function toggleMobileMenu(){
+    var menu = document.getElementById("mobileMenu");
+    var btn = document.getElementById("navToggleBtn");
+    var open = menu.classList.toggle("open");
+    btn.setAttribute("aria-expanded", open ? "true" : "false");
+  }
+
+  function closeMobileMenu(){
+    document.getElementById("mobileMenu").classList.remove("open");
+    document.getElementById("navToggleBtn").setAttribute("aria-expanded", "false");
   }
 
   function filterCategory(cat, btnEl){
