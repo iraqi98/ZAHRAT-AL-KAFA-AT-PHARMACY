@@ -214,7 +214,17 @@
 
   .product-grid{ display:grid; grid-template-columns: repeat(3, 1fr); gap: 22px; }
   @media (max-width: 980px){ .product-grid{ grid-template-columns: repeat(2,1fr); } }
-  @media (max-width: 620px){ .product-grid{ grid-template-columns: 1fr; } }
+  @media (max-width: 620px){
+    .product-grid{ grid-template-columns: 1fr 1fr; gap: 10px; }
+    .product-body{ padding: 12px 12px 14px; gap:6px; }
+    .product-body h4{ font-size:0.82rem; }
+    .product-body .desc{ font-size:0.72rem; }
+    .price{ font-size:0.88rem; }
+    .price small{ font-size:0.62rem; }
+  }
+
+  .product-grid.collapsed .product-card:nth-child(n+5){ display:none; }
+  .show-more-btn{ display:block; margin:14px auto 0; padding:10px 24px; border-radius:999px; border:1px solid var(--accent-strong, #2f6b4f); background:transparent; color:var(--accent-strong, #2f6b4f); font-family:inherit; cursor:pointer; }
 
   .product-card{
     background: var(--surface); border:1px solid var(--border); border-radius: 18px;
@@ -381,6 +391,9 @@
     .hero .row{ padding: 32px 0; }
     .offer{ padding: 28px; }
     .contact-wrap{ gap: 28px; }
+
+    .cat-tabs{ flex-wrap: nowrap; overflow-x: auto; -webkit-overflow-scrolling: touch; padding-bottom: 6px; }
+    .cat-pill{ flex: none; white-space: nowrap; }
   }
 
   @media (max-width: 480px){
@@ -534,11 +547,12 @@
       <button type="button" class="cat-pill" data-cat="boosters" onclick="filterCategory('boosters', this)">مقويات</button>
       <button type="button" class="cat-pill" data-cat="general" onclick="filterCategory('general', this)">مواد عامة</button>
       <button type="button" class="cat-pill" data-cat="skincare" onclick="filterCategory('skincare', this)">العناية بالبشرة</button>
+      <button type="button" class="cat-pill" data-cat="baby" onclick="filterCategory('baby', this)">عناية بالطفل</button>
     </div>
 
     <div class="cat-block" data-cat="meds">
       <h3>أدوية عامة</h3>
-      <div class="product-grid">
+      <div class="product-grid collapsed">
 
         <div class="product-card">
           <div class="product-media">
@@ -703,11 +717,12 @@
         </div>
 
       </div>
+      <button type="button" class="show-more-btn" onclick="toggleShowMore(this)">عرض المزيد</button>
     </div>
 
     <div class="cat-block" data-cat="supplements">
       <h3>مكملات غذائية</h3>
-      <div class="product-grid">
+      <div class="product-grid collapsed">
 
         <div class="product-card">
           <div class="product-media"><img src="images/Aktiv A-Z.jpg" alt="Doppelherz Aktiv A-Z"></div>
@@ -779,8 +794,135 @@
             </div>
           </div>
         </div>
+        <div class="product-card">
+          <div class="product-media"><img src="images/Calcium and vitamin c.jpg" alt="Calcium and Vitamin C"></div>
+          <div class="product-body">
+            <h4>Calcium & Vitamin C</h4>
+            <p class="desc">مكمل كالسيوم وفيتامين سي لدعم صحة العظام والمناعة.</p>
+            <div class="product-foot">
+              <span class="price">7,000<small> د.ع</small></span>
+              <button class="btn add-cart-btn btn-sm" onclick="addToCart(this,'p66','Calcium and Vitamin C',7000)">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 4h2l2.4 12.2A2 2 0 0 0 9.36 18H18a2 2 0 0 0 1.96-1.6L21.5 8H6"/></svg>
+                أضف للسلة
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="product-card">
+          <div class="product-media"><img src="images/Memoria syrup.jpg" alt="Memoria Syrup"></div>
+          <div class="product-body">
+            <h4>Memoria Syrup</h4>
+            <p class="desc">شراب مكمل يدعم التركيز والذاكرة.</p>
+            <div class="product-foot">
+              <span class="price">9,000<small> د.ع</small></span>
+              <button class="btn add-cart-btn btn-sm" onclick="addToCart(this,'p67','Memoria Syrup',9000)">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 4h2l2.4 12.2A2 2 0 0 0 9.36 18H18a2 2 0 0 0 1.96-1.6L21.5 8H6"/></svg>
+                أضف للسلة
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="product-card">
+          <div class="product-media"><img src="images/Neurorubine-forte.jpg" alt="Neurorubine Forte"></div>
+          <div class="product-body">
+            <h4>Neurorubine Forte</h4>
+            <p class="desc">فيتامينات B المركبة لدعم صحة الأعصاب.</p>
+            <div class="product-foot">
+              <span class="price">10,000<small> د.ع</small></span>
+              <button class="btn add-cart-btn btn-sm" onclick="addToCart(this,'p68','Neurorubine Forte',10000)">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 4h2l2.4 12.2A2 2 0 0 0 9.36 18H18a2 2 0 0 0 1.96-1.6L21.5 8H6"/></svg>
+                أضف للسلة
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="product-card">
+          <div class="product-media"><img src="images/Onlefit.jpg" alt="Onlefit"></div>
+          <div class="product-body">
+            <h4>Onlefit</h4>
+            <p class="desc">مكمل غذائي لدعم إدارة الوزن ضمن نظام غذائي متوازن.</p>
+            <div class="product-foot">
+              <span class="price">15,000<small> د.ع</small></span>
+              <button class="btn add-cart-btn btn-sm" onclick="addToCart(this,'p69','Onlefit',15000)">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 4h2l2.4 12.2A2 2 0 0 0 9.36 18H18a2 2 0 0 0 1.96-1.6L21.5 8H6"/></svg>
+                أضف للسلة
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="product-card">
+          <div class="product-media"><img src="images/Osteocare liquid.jpg" alt="Osteocare Liquid"></div>
+          <div class="product-body">
+            <h4>Osteocare Liquid</h4>
+            <p class="desc">مكمل كالسيوم وفيتامين D لدعم صحة العظام.</p>
+            <div class="product-foot">
+              <span class="price">9,000<small> د.ع</small></span>
+              <button class="btn add-cart-btn btn-sm" onclick="addToCart(this,'p70','Osteocare Liquid',9000)">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 4h2l2.4 12.2A2 2 0 0 0 9.36 18H18a2 2 0 0 0 1.96-1.6L21.5 8H6"/></svg>
+                أضف للسلة
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="product-card">
+          <div class="product-media"><img src="images/Panthophil.jpg" alt="Panthophil"></div>
+          <div class="product-body">
+            <h4>Panthophil</h4>
+            <p class="desc">مكمل فيتامين B5 لدعم صحة الجلد والشعر.</p>
+            <div class="product-foot">
+              <span class="price">8,000<small> د.ع</small></span>
+              <button class="btn add-cart-btn btn-sm" onclick="addToCart(this,'p71','Panthophil',8000)">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 4h2l2.4 12.2A2 2 0 0 0 9.36 18H18a2 2 0 0 0 1.96-1.6L21.5 8H6"/></svg>
+                أضف للسلة
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="product-card">
+          <div class="product-media"><img src="images/Refit.jpg" alt="Refit"></div>
+          <div class="product-body">
+            <h4>Refit</h4>
+            <p class="desc">مكمل غذائي يدعم الحيوية والنشاط اليومي.</p>
+            <div class="product-foot">
+              <span class="price">15,000<small> د.ع</small></span>
+              <button class="btn add-cart-btn btn-sm" onclick="addToCart(this,'p72','Refit',15000)">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 4h2l2.4 12.2A2 2 0 0 0 9.36 18H18a2 2 0 0 0 1.96-1.6L21.5 8H6"/></svg>
+                أضف للسلة
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="product-card">
+          <div class="product-media"><img src="images/SiderAL folic 30mg.jpg" alt="SiderAL Folic 30mg"></div>
+          <div class="product-body">
+            <h4>SiderAL Folic 30mg</h4>
+            <p class="desc">مكمل حديد وحمض الفوليك لعلاج فقر الدم.</p>
+            <div class="product-foot">
+              <span class="price">8,500<small> د.ع</small></span>
+              <button class="btn add-cart-btn btn-sm" onclick="addToCart(this,'p73','SiderAL Folic 30mg',8500)">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 4h2l2.4 12.2A2 2 0 0 0 9.36 18H18a2 2 0 0 0 1.96-1.6L21.5 8H6"/></svg>
+                أضف للسلة
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="product-card">
+          <div class="product-media"><img src="images/Vitaced vitamin c.jpg" alt="Vitaced Vitamin C"></div>
+          <div class="product-body">
+            <h4>Vitaced Vitamin C</h4>
+            <p class="desc">مكمل فيتامين سي لدعم المناعة.</p>
+            <div class="product-foot">
+              <span class="price">6,000<small> د.ع</small></span>
+              <button class="btn add-cart-btn btn-sm" onclick="addToCart(this,'p74','Vitaced Vitamin C',6000)">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 4h2l2.4 12.2A2 2 0 0 0 9.36 18H18a2 2 0 0 0 1.96-1.6L21.5 8H6"/></svg>
+                أضف للسلة
+              </button>
+            </div>
+          </div>
+        </div>
 
       </div>
+      <button type="button" class="show-more-btn" onclick="toggleShowMore(this)">عرض المزيد</button>
     </div>
 
     <div class="cat-block" data-cat="care">
@@ -797,6 +939,20 @@
             <div class="product-foot">
               <span class="price">15,000<small> د.ع</small></span>
               <button class="btn add-cart-btn btn-sm" onclick="addToCart(this,'p15','Minoxidil Plus 5% Shampoo',15000)">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 4h2l2.4 12.2A2 2 0 0 0 9.36 18H18a2 2 0 0 0 1.96-1.6L21.5 8H6"/></svg>
+                أضف للسلة
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="product-card">
+          <div class="product-media"><img src="images/Minodil X spray.jpg" alt="Minodil X Spray"></div>
+          <div class="product-body">
+            <h4>Minodil X Spray</h4>
+            <p class="desc">سبراي مينوكسيديل لعلاج تساقط الشعر وتحفيز نموه.</p>
+            <div class="product-foot">
+              <span class="price">16,000<small> د.ع</small></span>
+              <button class="btn add-cart-btn btn-sm" onclick="addToCart(this,'p75','Minodil X Spray',16000)">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 4h2l2.4 12.2A2 2 0 0 0 9.36 18H18a2 2 0 0 0 1.96-1.6L21.5 8H6"/></svg>
                 أضف للسلة
               </button>
@@ -857,7 +1013,7 @@
 
     <div class="cat-block" data-cat="body">
       <h3>عناية بالجسم</h3>
-      <div class="product-grid">
+      <div class="product-grid collapsed">
         <div class="product-card">
           <div class="product-media"><img src="images/Rexona for women.jpg" alt="Rexona for women"></div>
           <div class="product-body">
@@ -929,6 +1085,7 @@
           </div>
         </div>
       </div>
+      <button type="button" class="show-more-btn" onclick="toggleShowMore(this)">عرض المزيد</button>
     </div>
 
     <div class="cat-block" data-cat="boosters">
@@ -973,7 +1130,7 @@
 
     <div class="cat-block" data-cat="skincare">
       <h3>العناية بالبشرة</h3>
-      <div class="product-grid">
+      <div class="product-grid collapsed">
         <div class="product-card">
           <div class="product-media"><img src="images/CeraVe acne control cleanser.jpg" alt="CeraVe Acne Control Cleanser"></div>
           <div class="product-body">
@@ -1128,7 +1285,225 @@
             </div>
           </div>
         </div>
+        <div class="product-card">
+          <div class="product-media"><img src="images/Anua azelaic 10 + Hyaluron.jpg" alt="Anua Azelaic 10 + Hyaluron"></div>
+          <div class="product-body">
+            <h4>Anua Azelaic 10 + Hyaluron Serum</h4>
+            <p class="desc">سيروم لتوحيد لون البشرة وتهدئة الاحمرار مع ترطيب عميق.</p>
+            <div class="product-foot">
+              <span class="price">22,000<small> د.ع</small></span>
+              <button class="btn add-cart-btn btn-sm" onclick="addToCart(this,'p58','Anua Azelaic 10 Hyaluron',22000)">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 4h2l2.4 12.2A2 2 0 0 0 9.36 18H18a2 2 0 0 0 1.96-1.6L21.5 8H6"/></svg>
+                أضف للسلة
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="product-card">
+          <div class="product-media"><img src="images/Anua heartleaf.jpg" alt="Anua Heartleaf Toner"></div>
+          <div class="product-body">
+            <h4>Anua Heartleaf 77% Toner</h4>
+            <p class="desc">تونر مهدئ يقلل احمرار وتهيج البشرة الحساسة.</p>
+            <div class="product-foot">
+              <span class="price">18,000<small> د.ع</small></span>
+              <button class="btn add-cart-btn btn-sm" onclick="addToCart(this,'p59','Anua Heartleaf Toner',18000)">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 4h2l2.4 12.2A2 2 0 0 0 9.36 18H18a2 2 0 0 0 1.96-1.6L21.5 8H6"/></svg>
+                أضف للسلة
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="product-card">
+          <div class="product-media"><img src="images/Anua.jpg" alt="Anua Cleanser"></div>
+          <div class="product-body">
+            <h4>Anua Cleanser</h4>
+            <p class="desc">غسول لطيف ينظف البشرة دون التسبب بجفافها.</p>
+            <div class="product-foot">
+              <span class="price">16,000<small> د.ع</small></span>
+              <button class="btn add-cart-btn btn-sm" onclick="addToCart(this,'p60','Anua Cleanser',16000)">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 4h2l2.4 12.2A2 2 0 0 0 9.36 18H18a2 2 0 0 0 1.96-1.6L21.5 8H6"/></svg>
+                أضف للسلة
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="product-card">
+          <div class="product-media"><img src="images/Aquasoft cream.jpg" alt="Aquasoft Cream"></div>
+          <div class="product-body">
+            <h4>Aquasoft Cream</h4>
+            <p class="desc">كريم مرطب يومي مناسب لجميع أنواع البشرة.</p>
+            <div class="product-foot">
+              <span class="price">10,000<small> د.ع</small></span>
+              <button class="btn add-cart-btn btn-sm" onclick="addToCart(this,'p61','Aquasoft Cream',10000)">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 4h2l2.4 12.2A2 2 0 0 0 9.36 18H18a2 2 0 0 0 1.96-1.6L21.5 8H6"/></svg>
+                أضف للسلة
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="product-card">
+          <div class="product-media"><img src="images/Aquasoft soap.jpg" alt="Aquasoft Soap"></div>
+          <div class="product-body">
+            <h4>Aquasoft Soap</h4>
+            <p class="desc">صابون منظف لطيف يحافظ على ترطيب البشرة.</p>
+            <div class="product-foot">
+              <span class="price">6,000<small> د.ع</small></span>
+              <button class="btn add-cart-btn btn-sm" onclick="addToCart(this,'p62','Aquasoft Soap',6000)">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 4h2l2.4 12.2A2 2 0 0 0 9.36 18H18a2 2 0 0 0 1.96-1.6L21.5 8H6"/></svg>
+                أضف للسلة
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="product-card">
+          <div class="product-media"><img src="images/Derma roller.jpg" alt="Derma Roller"></div>
+          <div class="product-body">
+            <h4>Derma Roller</h4>
+            <p class="desc">أداة عناية بالبشرة تحفّز تجدد الخلايا ونضارة الوجه.</p>
+            <div class="product-foot">
+              <span class="price">12,000<small> د.ع</small></span>
+              <button class="btn add-cart-btn btn-sm" onclick="addToCart(this,'p63','Derma Roller',12000)">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 4h2l2.4 12.2A2 2 0 0 0 9.36 18H18a2 2 0 0 0 1.96-1.6L21.5 8H6"/></svg>
+                أضف للسلة
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="product-card">
+          <div class="product-media"><img src="images/Qv cream for dry skin.jpg" alt="QV Cream for Dry Skin"></div>
+          <div class="product-body">
+            <h4>QV Cream for Dry Skin</h4>
+            <p class="desc">كريم مرطب مكثف للبشرة الجافة جدًا.</p>
+            <div class="product-foot">
+              <span class="price">14,000<small> د.ع</small></span>
+              <button class="btn add-cart-btn btn-sm" onclick="addToCart(this,'p64','QV Cream Dry Skin',14000)">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 4h2l2.4 12.2A2 2 0 0 0 9.36 18H18a2 2 0 0 0 1.96-1.6L21.5 8H6"/></svg>
+                أضف للسلة
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="product-card">
+          <div class="product-media"><img src="images/Teen derm.jpg" alt="Teen Derm"></div>
+          <div class="product-body">
+            <h4>Teen Derm</h4>
+            <p class="desc">عناية متخصصة ببشرة المراهقين المعرضة لحب الشباب.</p>
+            <div class="product-foot">
+              <span class="price">12,000<small> د.ع</small></span>
+              <button class="btn add-cart-btn btn-sm" onclick="addToCart(this,'p65','Teen Derm',12000)">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 4h2l2.4 12.2A2 2 0 0 0 9.36 18H18a2 2 0 0 0 1.96-1.6L21.5 8H6"/></svg>
+                أضف للسلة
+              </button>
+            </div>
+          </div>
+        </div>
       </div>
+      <button type="button" class="show-more-btn" onclick="toggleShowMore(this)">عرض المزيد</button>
+    </div>
+
+    <div class="cat-block" data-cat="baby">
+      <h3>عناية بالطفل</h3>
+      <div class="product-grid collapsed">
+        <div class="product-card">
+          <div class="product-media"><img src="images/Aillin baby bottle.jpg" alt="Aillin Baby Bottle"></div>
+          <div class="product-body">
+            <h4>Aillin Baby Bottle</h4>
+            <p class="desc">زجاجة رضاعة آمنة ومريحة للأطفال الرضّع.</p>
+            <div class="product-foot">
+              <span class="price">5,000<small> د.ع</small></span>
+              <button class="btn add-cart-btn btn-sm" onclick="addToCart(this,'p51','Aillin Baby Bottle',5000)">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 4h2l2.4 12.2A2 2 0 0 0 9.36 18H18a2 2 0 0 0 1.96-1.6L21.5 8H6"/></svg>
+                أضف للسلة
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="product-card">
+          <div class="product-media"><img src="images/Bepanthen moisturizing cream.jpg" alt="Bepanthen Baby Cream"></div>
+          <div class="product-body">
+            <h4>Bepanthen Moisturizing Baby Cream</h4>
+            <p class="desc">كريم مرطب لطيف على بشرة الطفل الحساسة.</p>
+            <div class="product-foot">
+              <span class="price">8,000<small> د.ع</small></span>
+              <button class="btn add-cart-btn btn-sm" onclick="addToCart(this,'p52','Bepanthen Baby Cream',8000)">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 4h2l2.4 12.2A2 2 0 0 0 9.36 18H18a2 2 0 0 0 1.96-1.6L21.5 8H6"/></svg>
+                أضف للسلة
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="product-card">
+          <div class="product-media"><img src="images/Bepanthen protective baby ointment.jpg" alt="Bepanthen Baby Ointment"></div>
+          <div class="product-body">
+            <h4>Bepanthen Protective Baby Ointment</h4>
+            <p class="desc">مرهم واقي يعالج ويمنع طفح الحفاض عند الأطفال.</p>
+            <div class="product-foot">
+              <span class="price">9,000<small> د.ع</small></span>
+              <button class="btn add-cart-btn btn-sm" onclick="addToCart(this,'p53','Bepanthen Baby Ointment',9000)">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 4h2l2.4 12.2A2 2 0 0 0 9.36 18H18a2 2 0 0 0 1.96-1.6L21.5 8H6"/></svg>
+                أضف للسلة
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="product-card">
+          <div class="product-media"><img src="images/Nunu shampoo 300ml.jpg" alt="Nunu Baby Shampoo 300ml"></div>
+          <div class="product-body">
+            <h4>Nunu Baby Shampoo 300ml</h4>
+            <p class="desc">شامبو لطيف لا يسبب دموع العين، مخصص لفروة رأس الطفل الحساسة.</p>
+            <div class="product-foot">
+              <span class="price">5,000<small> د.ع</small></span>
+              <button class="btn add-cart-btn btn-sm" onclick="addToCart(this,'p54','Nunu Baby Shampoo 300ml',5000)">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 4h2l2.4 12.2A2 2 0 0 0 9.36 18H18a2 2 0 0 0 1.96-1.6L21.5 8H6"/></svg>
+                أضف للسلة
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="product-card">
+          <div class="product-media"><img src="images/Nunu shampoo 800ml.jpg" alt="Nunu Baby Shampoo 800ml"></div>
+          <div class="product-body">
+            <h4>Nunu Baby Shampoo 800ml</h4>
+            <p class="desc">نفس تركيبة الشامبو اللطيف بحجم اقتصادي أكبر.</p>
+            <div class="product-foot">
+              <span class="price">8,000<small> د.ع</small></span>
+              <button class="btn add-cart-btn btn-sm" onclick="addToCart(this,'p55','Nunu Baby Shampoo 800ml',8000)">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 4h2l2.4 12.2A2 2 0 0 0 9.36 18H18a2 2 0 0 0 1.96-1.6L21.5 8H6"/></svg>
+                أضف للسلة
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="product-card">
+          <div class="product-media"><img src="images/Sudocrem 60g.jpg" alt="Sudocrem 60g"></div>
+          <div class="product-body">
+            <h4>Sudocrem 60g</h4>
+            <p class="desc">كريم مضاد للالتهاب يعالج طفح الحفاض وتهيج الجلد.</p>
+            <div class="product-foot">
+              <span class="price">6,000<small> د.ع</small></span>
+              <button class="btn add-cart-btn btn-sm" onclick="addToCart(this,'p56','Sudocrem 60g',6000)">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 4h2l2.4 12.2A2 2 0 0 0 9.36 18H18a2 2 0 0 0 1.96-1.6L21.5 8H6"/></svg>
+                أضف للسلة
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="product-card">
+          <div class="product-media"><img src="images/Sudocrem 400g.jpg" alt="Sudocrem 400g"></div>
+          <div class="product-body">
+            <h4>Sudocrem 400g</h4>
+            <p class="desc">نفس تركيبة كريم الحفاض المضاد للالتهاب بحجم عائلي أكبر.</p>
+            <div class="product-foot">
+              <span class="price">15,000<small> د.ع</small></span>
+              <button class="btn add-cart-btn btn-sm" onclick="addToCart(this,'p57','Sudocrem 400g',15000)">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 4h2l2.4 12.2A2 2 0 0 0 9.36 18H18a2 2 0 0 0 1.96-1.6L21.5 8H6"/></svg>
+                أضف للسلة
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <button type="button" class="show-more-btn" onclick="toggleShowMore(this)">عرض المزيد</button>
     </div>
 
     <div class="offer">
@@ -1336,6 +1711,13 @@
       var show = cat === "all" || block.getAttribute("data-cat") === cat;
       block.classList.toggle("is-hidden", !show);
     });
+  }
+
+  function toggleShowMore(btn){
+    var grid = btn.previousElementSibling;
+    if(!grid || !grid.classList.contains("product-grid")) return;
+    var collapsed = grid.classList.toggle("collapsed");
+    btn.textContent = collapsed ? "عرض المزيد" : "عرض أقل";
   }
 
   function searchProducts(query){
