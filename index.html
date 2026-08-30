@@ -13,11 +13,12 @@
     --surface-alt: #EAF4ED;
     --ink: #142720;
     --ink-muted: #55685D;
-    --accent: #2F6B4F;
-    --accent-strong: #1B4332;
-    --accent-soft: #D6EBDF;
+    --accent: #1d7ab5;
+    --accent-strong: #155e8a;
+    --accent-soft: #e3f0f9;
     --border: #DCE7DF;
     --gold: #AD8A34;
+    --whatsapp-green: #25D366;
     --shadow: 0 18px 40px -22px rgba(20,39,32,0.35);
   }
   @media (prefers-color-scheme: dark){
@@ -212,8 +213,7 @@
   }
   .cat-block > h3::after{ content:""; flex:1; height:1px; background: var(--border); }
 
-  .product-grid{ display:grid; grid-template-columns: repeat(3, 1fr); gap: 22px; }
-  @media (max-width: 980px){ .product-grid{ grid-template-columns: repeat(2,1fr); } }
+  .product-grid{ display:grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 16px; }
   @media (max-width: 620px){
     .product-grid{ grid-template-columns: 1fr 1fr; gap: 10px; }
     .product-body{ padding: 12px 12px 14px; gap:6px; }
@@ -227,22 +227,29 @@
   .show-more-btn{ display:block; margin:14px auto 0; padding:10px 24px; border-radius:999px; border:1px solid var(--accent-strong, #2f6b4f); background:transparent; color:var(--accent-strong, #2f6b4f); font-family:inherit; cursor:pointer; }
 
   .product-card{
-    background: var(--surface); border:1px solid var(--border); border-radius: 18px;
-    overflow:hidden; display:flex; flex-direction:column; box-shadow: var(--shadow);
+    display:flex; flex-direction:column;
+    border-radius: 16px; overflow:hidden;
+    background: var(--surface);
+    box-shadow: 0 2px 10px rgba(0,0,0,0.06);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+  .product-card:hover{
+    transform: translateY(-4px);
+    box-shadow: 0 12px 24px rgba(0,0,0,0.12);
   }
   .product-media{
-    background: var(--surface-alt);
-    aspect-ratio: 4/3; display:flex; align-items:center; justify-content:center;
+    aspect-ratio: 1/1; display:flex; align-items:center; justify-content:center;
+    background:#ffffff; overflow:hidden; padding:14px;
     position:relative;
   }
   .product-media svg{ width:56%; height:56%; color: var(--accent); opacity:.85; }
-  .product-media img{ width:100%; height:100%; object-fit:cover; }
+  .product-media img{ width:100%; height:100%; object-fit:contain; }
   .product-media .badge{
     position:absolute; top:12px; inset-inline-start:12px;
     background: var(--gold); color:#1A1400; font-size:0.72rem; font-weight:800;
     padding:4px 10px; border-radius:999px;
   }
-  .product-body{ padding: 18px 18px 20px; display:flex; flex-direction:column; gap:10px; flex:1; }
+  .product-body{ padding: 14px 16px 16px; display:flex; flex-direction:column; gap:6px; flex:1; }
   .product-body h4{ font-size:1rem; color:var(--ink); font-family:"IBM Plex Sans Arabic"; font-weight:700; }
   .product-body .desc{ font-size:0.85rem; color: var(--ink-muted); flex:1; }
   .product-foot{ display:flex; align-items:center; justify-content:space-between; margin-top:6px; gap:10px; }
@@ -300,6 +307,7 @@
   .foot-social{ display:flex; gap:12px; }
   .foot-social a{ width:36px; height:36px; border-radius:50%; background:var(--surface-alt); display:flex; align-items:center; justify-content:center; border:1px solid var(--border); }
   .foot-social svg{ width:17px; height:17px; color:var(--accent-strong); }
+  .foot-social a[aria-label="واتساب"] svg{ color: var(--whatsapp-green); }
 
   @media (prefers-reduced-motion: reduce){
     .btn{ transition:none; }
@@ -439,6 +447,11 @@
         <button class="cart-btn" onclick="openCart()" aria-label="عرض السلة">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 4h2l2.4 12.2A2 2 0 0 0 9.36 18H18a2 2 0 0 0 1.96-1.6L21.5 8H6"/><circle cx="9.5" cy="21" r="1.4" fill="currentColor" stroke="none"/><circle cx="17.5" cy="21" r="1.4" fill="currentColor" stroke="none"/></svg>
           <span class="cart-count" id="cartCount" data-empty="true">0</span>
+        </button>
+        <button type="button" id="themeToggle" onclick="toggleTheme()" aria-label="تبديل الوضع الداكن" style="width:40px; height:40px; border-radius:999px; border:1px solid var(--border); background:var(--surface); color:var(--ink); display:flex; align-items:center; justify-content:center; cursor:pointer;">
+          <svg id="themeIcon" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M12 3a9 9 0 1 0 9 9c0-.46-.04-.92-.1-1.36a5.389 5.389 0 0 1-4.4 2.26 5.403 5.403 0 0 1-3.14-9.8c-.44-.06-.9-.1-1.36-.1Z"/>
+          </svg>
         </button>
         <button class="nav-toggle" id="navToggleBtn" onclick="toggleMobileMenu()" aria-label="فتح القائمة" aria-expanded="false">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
@@ -1633,6 +1646,25 @@
 <script>
   var CART = {};
   var WA_NUMBER = "9647732517466";
+
+  function applyTheme(theme){
+    document.documentElement.setAttribute("data-theme", theme);
+    localStorage.setItem("theme", theme);
+    var icon = document.getElementById("themeIcon");
+    if(icon){
+      icon.innerHTML = theme === "dark"
+        ? '<circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/>'
+        : '<path d="M12 3a9 9 0 1 0 9 9c0-.46-.04-.92-.1-1.36a5.389 5.389 0 0 1-4.4 2.26 5.403 5.403 0 0 1-3.14-9.8c-.44-.06-.9-.1-1.36-.1Z"/>';
+    }
+  }
+  function toggleTheme(){
+    var current = document.documentElement.getAttribute("data-theme") || "light";
+    applyTheme(current === "dark" ? "light" : "dark");
+  }
+  (function(){
+    var saved = localStorage.getItem("theme");
+    if(saved){ applyTheme(saved); }
+  })();
 
   function formatNum(n){
     return n.toLocaleString("en-US");
