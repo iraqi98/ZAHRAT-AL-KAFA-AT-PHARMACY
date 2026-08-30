@@ -149,27 +149,20 @@
     border-bottom: 1px solid var(--border);
   }
   .hero .row{
-    display:grid; grid-template-columns: 1.1fr 0.9fr; gap: 48px;
-    align-items:center; padding: 64px 0 56px;
+    display:block;
+    padding: 36px 0;
   }
-  @media (max-width: 900px){ .hero .row{ grid-template-columns: 1fr; padding: 40px 0; } }
   .eyebrow{
     display:inline-flex; align-items:center; gap:8px;
     font-size:0.8rem; font-weight:700; letter-spacing:.04em;
     color: var(--accent); background: var(--accent-soft);
-    padding: 6px 14px; border-radius: 999px; margin-bottom: 18px;
+    padding: 6px 14px; border-radius: 999px; margin-bottom: 14px;
   }
   .hero h1{ font-size: clamp(1.9rem, 3.4vw, 2.85rem); line-height:1.28; }
   #heroTitle{ transition: opacity .4s ease; }
   #heroTitle.fade{ opacity: 0; }
-  .hero .lede{ margin-top:16px; font-size:1.08rem; color: var(--ink-muted); max-width: 46ch; }
-  .hero .ctas{ display:flex; gap:14px; margin-top: 30px; flex-wrap:wrap; }
-  .hero .trust{ display:flex; gap:26px; margin-top:38px; flex-wrap:wrap; }
-  .hero .trust .t{ display:flex; align-items:center; gap:9px; font-size:0.88rem; color:var(--ink-muted); font-weight:600; }
-  .hero .trust svg{ width:20px; height:20px; color: var(--accent); flex:none; }
-
-  .hero-art{ position:relative; display:flex; align-items:center; justify-content:center; }
-  .hero-art svg{ width: 100%; max-width: 420px; height:auto; }
+  .hero .lede{ margin-top:14px; font-size:1.08rem; color: var(--ink-muted); max-width: 46ch; }
+  .hero .ctas{ display:flex; gap:14px; margin-top: 22px; flex-wrap:wrap; }
 
   /* ---------- sections ---------- */
   section{ padding: 76px 0; }
@@ -252,7 +245,7 @@
   .product-body{ padding: 14px 16px 16px; display:flex; flex-direction:column; gap:6px; flex:1; }
   .product-body h4{ font-size:1rem; color:var(--ink); font-family:"IBM Plex Sans Arabic"; font-weight:700; }
   .product-body .desc{ font-size:0.85rem; color: var(--ink-muted); flex:1; }
-  .product-foot{ display:flex; align-items:center; justify-content:space-between; margin-top:6px; gap:10px; }
+  .product-foot{ display:flex; flex-direction:column; align-items:stretch; margin-top:6px; gap:10px; }
   .price{ font-weight:800; color: var(--accent-strong); font-variant-numeric: tabular-nums; font-size:1.05rem; }
   .price small{ font-size:0.7rem; font-weight:600; color:var(--ink-muted); }
 
@@ -330,8 +323,17 @@
   .cart-count[data-empty="true"]{ display:none; }
 
   .add-cart-btn{ background: var(--accent-soft); color: var(--accent-strong); border-color: var(--border); }
-  .add-cart-btn svg{ width:16px; height:16px; }
   .add-cart-btn.added{ background: var(--accent); color:#08170F; border-color: var(--accent); }
+  .product-card .add-cart-btn{
+    width:100%;
+    display:flex; align-items:center; justify-content:center; gap:6px;
+    padding:10px 12px;
+    border-radius:999px;
+    font-size:14px;
+    font-weight:700;
+    white-space:nowrap;
+  }
+  .product-card .add-cart-btn svg{ width:16px; height:16px; flex:none; }
 
   .cart-overlay{
     position: fixed; inset:0; background: rgba(10,20,15,0.45);
@@ -410,7 +412,6 @@
     .hero h1{ font-size: 1.7rem; }
     .hero .ctas{ flex-direction:column; align-items:stretch; }
     .hero .ctas .btn{ width:100%; justify-content:center; }
-    .hero .trust{ gap:14px 20px; }
 
     .btn{ padding: 11px 18px; font-size:0.9rem; }
 
@@ -484,17 +485,6 @@
           احجز استشارة عبر واتساب
         </a>
         <a class="btn btn-ghost" href="#products">تصفّح المنتجات</a>
-      </div>
-      <div class="trust">
-        <div class="t"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2 4 5v6c0 5 3.4 9 8 11 4.6-2 8-6 8-11V5l-8-3Z"/></svg>صيدلي مجاز</div>
-        <div class="t"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="7" width="14" height="10" rx="1"/><path d="M15 10h4l3 3v4h-7"/><circle cx="6" cy="19" r="1.6"/><circle cx="18" cy="19" r="1.6"/></svg>توصيل خلال ساعة</div>
-        <div class="t"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 12h4l2-8 4 16 2-8h6"/></svg>استشارة مجانية</div>
-        <div class="t"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg>منتجات أصلية 100٪</div>
-      </div>
-    </div>
-    <div class="hero-art" style="position:relative; display:flex; align-items:center; justify-content:center;">
-      <div style="width:340px; height:340px; max-width:80%; border-radius:24px; background:var(--surface); box-shadow: 0 30px 60px -30px rgba(20,39,32,0.25); display:flex; align-items:center; justify-content:center; overflow:hidden;">
-        <img src="hero-image.png" alt="صيدلية زهرة الكفاءات" style="width:100%; height:100%; object-fit:contain;">
       </div>
     </div>
   </div>
