@@ -254,6 +254,9 @@
   .product-foot{ display:flex; flex-direction:column; align-items:stretch; margin-top:6px; gap:10px; }
   .price{ font-weight:800; color: var(--accent-strong); font-variant-numeric: tabular-nums; font-size:1.05rem; }
   .price small{ font-size:0.7rem; font-weight:600; color:var(--ink-muted); }
+  .price-wrap{ display:flex; flex-direction:column; gap:2px; }
+  .price-unit{ font-size:11px; color:var(--ink-muted); font-weight:500; }
+  @media (max-width:620px){ .price-unit{ font-size:10px; } }
 
   /* offer banner */
   .offer{
@@ -569,7 +572,10 @@
             <h4>Diostar 160mg (Valsartan)</h4>
             <p class="desc">لعلاج ضغط الدم المرتفع، تركيز أعلى، 30 قرص.</p>
             <div class="product-foot">
-              <span class="price">12,000<small> د.ع</small></span>
+              <div class="price-wrap">
+                <span class="price">12,000<small> د.ع</small></span>
+                <span class="price-unit">للشريط الواحد</span>
+              </div>
               <button class="btn add-cart-btn btn-sm" onclick="addToCart(this,'p17','Diostar 160mg',12000)">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 4h2l2.4 12.2A2 2 0 0 0 9.36 18H18a2 2 0 0 0 1.96-1.6L21.5 8H6"/></svg>
                 أضف للسلة
@@ -586,7 +592,10 @@
             <h4>Diostar 80mg (Valsartan)</h4>
             <p class="desc">لعلاج ضغط الدم المرتفع، 30 قرص.</p>
             <div class="product-foot">
-              <span class="price">9,000<small> د.ع</small></span>
+              <div class="price-wrap">
+                <span class="price">9,000<small> د.ع</small></span>
+                <span class="price-unit">للشريط الواحد</span>
+              </div>
               <button class="btn add-cart-btn btn-sm" onclick="addToCart(this,'p16','Diostar 80mg',9000)">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 4h2l2.4 12.2A2 2 0 0 0 9.36 18H18a2 2 0 0 0 1.96-1.6L21.5 8H6"/></svg>
                 أضف للسلة
@@ -601,7 +610,10 @@
             <h4>Glucophage 1000 mg</h4>
             <p class="desc">لعلاج مرض السكري من النوع الثاني، يساعد على ضبط مستوى السكر في الدم، علبة 30 قرص.</p>
             <div class="product-foot">
-              <span class="price">4,000<small> د.ع</small></span>
+              <div class="price-wrap">
+                <span class="price">4,000<small> د.ع</small></span>
+                <span class="price-unit">للشريط الواحد</span>
+              </div>
               <button class="btn add-cart-btn btn-sm" onclick="addToCart(this,'p21','Glucophage 1000mg',4000)">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 4h2l2.4 12.2A2 2 0 0 0 9.36 18H18a2 2 0 0 0 1.96-1.6L21.5 8H6"/></svg>
                 أضف للسلة
@@ -616,7 +628,10 @@
             <h4>Glucophage 850 mg</h4>
             <p class="desc">لعلاج مرض السكري من النوع الثاني، تركيز متوسط، علبة 30 قرص.</p>
             <div class="product-foot">
-              <span class="price">4,000<small> د.ع</small></span>
+              <div class="price-wrap">
+                <span class="price">4,000<small> د.ع</small></span>
+                <span class="price-unit">للشريط الواحد</span>
+              </div>
               <button class="btn add-cart-btn btn-sm" onclick="addToCart(this,'p22','Glucophage 850mg',4000)">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 4h2l2.4 12.2A2 2 0 0 0 9.36 18H18a2 2 0 0 0 1.96-1.6L21.5 8H6"/></svg>
                 أضف للسلة
@@ -631,7 +646,10 @@
             <h4>Glucovance 500/2.5 mg</h4>
             <p class="desc">تركيبة تجمع الميتفورمين والغليبنكلاميد بتركيز أخف للسيطرة على مستوى السكر بالدم.</p>
             <div class="product-foot">
-              <span class="price">4,000<small> د.ع</small></span>
+              <div class="price-wrap">
+                <span class="price">4,000<small> د.ع</small></span>
+                <span class="price-unit">للشريط الواحد</span>
+              </div>
               <button class="btn add-cart-btn btn-sm" onclick="addToCart(this,'p24','Glucovance 500/2.5mg',4000)">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 4h2l2.4 12.2A2 2 0 0 0 9.36 18H18a2 2 0 0 0 1.96-1.6L21.5 8H6"/></svg>
                 أضف للسلة
@@ -648,7 +666,10 @@
             <h4>Oflam (ديكلوفيناك بوتاسيوم)</h4>
             <p class="desc">لعلاج الآلام والالتهابات، حبيبات قابلة للذوبان، علبة 10 أكياس.</p>
             <div class="product-foot">
-              <span class="price">500<small> د.ع</small></span>
+              <div class="price-wrap">
+                <span class="price">500<small> د.ع</small></span>
+                <span class="price-unit">للظرف الواحد</span>
+              </div>
               <button class="btn add-cart-btn btn-sm" onclick="addToCart(this,'p20','Oflam',500)">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 4h2l2.4 12.2A2 2 0 0 0 9.36 18H18a2 2 0 0 0 1.96-1.6L21.5 8H6"/></svg>
                 أضف للسلة
@@ -663,7 +684,10 @@
             <h4>Onlefit</h4>
             <p class="desc">مكمل غذائي لدعم إدارة الوزن ضمن نظام غذائي متوازن.</p>
             <div class="product-foot">
-              <span class="price">8,000<small> د.ع</small></span>
+              <div class="price-wrap">
+                <span class="price">8,000<small> د.ع</small></span>
+                <span class="price-unit">للشريط الواحد</span>
+              </div>
               <button class="btn add-cart-btn btn-sm" onclick="addToCart(this,'p69','Onlefit',8000)">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 4h2l2.4 12.2A2 2 0 0 0 9.36 18H18a2 2 0 0 0 1.96-1.6L21.5 8H6"/></svg>
                 أضف للسلة
@@ -680,7 +704,10 @@
             <h4>Panadol Advance</h4>
             <p class="desc">مسكن وخافض حرارة سريع المفعول، 24 قرص.</p>
             <div class="product-foot">
-              <span class="price">2,500<small> د.ع</small></span>
+              <div class="price-wrap">
+                <span class="price">2,500<small> د.ع</small></span>
+                <span class="price-unit">للشريط الواحد</span>
+              </div>
               <button class="btn add-cart-btn btn-sm" onclick="addToCart(this,'p14','Panadol Advance',2500)">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 4h2l2.4 12.2A2 2 0 0 0 9.36 18H18a2 2 0 0 0 1.96-1.6L21.5 8H6"/></svg>
                 أضف للسلة
@@ -697,7 +724,10 @@
             <h4>Panadol Extra Advance</h4>
             <p class="desc">مسكن قوي للألم يجمع الباراسيتامول مع الكافيين، فعال لآلام الصداع.</p>
             <div class="product-foot">
-              <span class="price">3,000<small> د.ع</small></span>
+              <div class="price-wrap">
+                <span class="price">3,000<small> د.ع</small></span>
+                <span class="price-unit">للشريط الواحد</span>
+              </div>
               <button class="btn add-cart-btn btn-sm" onclick="addToCart(this,'p13','Panadol Extra Advance',3000)">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 4h2l2.4 12.2A2 2 0 0 0 9.36 18H18a2 2 0 0 0 1.96-1.6L21.5 8H6"/></svg>
                 أضف للسلة
@@ -712,7 +742,10 @@
             <h4>Panadol Joint</h4>
             <p class="desc">مسكن مخصص لآلام المفاصل والتهاب المفاصل.</p>
             <div class="product-foot">
-              <span class="price">4,500<small> د.ع</small></span>
+              <div class="price-wrap">
+                <span class="price">4,500<small> د.ع</small></span>
+                <span class="price-unit">للشريط الواحد</span>
+              </div>
               <button class="btn add-cart-btn btn-sm" onclick="addToCart(this,'p94','Panadol Joint',4500)">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 4h2l2.4 12.2A2 2 0 0 0 9.36 18H18a2 2 0 0 0 1.96-1.6L21.5 8H6"/></svg>
                 أضف للسلة
@@ -727,7 +760,10 @@
             <h4>Panadol Night</h4>
             <p class="desc">أقراص مسكنة تساعد على النوم ليلًا.</p>
             <div class="product-foot">
-              <span class="price">3,000<small> د.ع</small></span>
+              <div class="price-wrap">
+                <span class="price">3,000<small> د.ع</small></span>
+                <span class="price-unit">للشريط الواحد</span>
+              </div>
               <button class="btn add-cart-btn btn-sm" onclick="addToCart(this,'p84','Panadol Night',3000)">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 4h2l2.4 12.2A2 2 0 0 0 9.36 18H18a2 2 0 0 0 1.96-1.6L21.5 8H6"/></svg>
                 أضف للسلة
@@ -742,7 +778,10 @@
             <h4>Panadol Sinus</h4>
             <p class="desc">مسكن لأعراض الجيوب الأنفية والاحتقان مع تخفيف الألم.</p>
             <div class="product-foot">
-              <span class="price">3,500<small> د.ع</small></span>
+              <div class="price-wrap">
+                <span class="price">3,500<small> د.ع</small></span>
+                <span class="price-unit">للشريط الواحد</span>
+              </div>
               <button class="btn add-cart-btn btn-sm" onclick="addToCart(this,'p93','Panadol Sinus',3500)">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 4h2l2.4 12.2A2 2 0 0 0 9.36 18H18a2 2 0 0 0 1.96-1.6L21.5 8H6"/></svg>
                 أضف للسلة
@@ -757,7 +796,10 @@
             <h4>Refit</h4>
             <p class="desc">مكمل غذائي يدعم الحيوية والنشاط اليومي.</p>
             <div class="product-foot">
-              <span class="price">9,000<small> د.ع</small></span>
+              <div class="price-wrap">
+                <span class="price">9,000<small> د.ع</small></span>
+                <span class="price-unit">للشريط الواحد</span>
+              </div>
               <button class="btn add-cart-btn btn-sm" onclick="addToCart(this,'p72','Refit',9000)">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 4h2l2.4 12.2A2 2 0 0 0 9.36 18H18a2 2 0 0 0 1.96-1.6L21.5 8H6"/></svg>
                 أضف للسلة
@@ -774,7 +816,10 @@
             <h4>Strepsils Honey &amp; Lemon</h4>
             <p class="desc">حبوب مص لتهدئة التهاب الحلق بنكهة العسل والليمون، علبة 24 قرص.</p>
             <div class="product-foot">
-              <span class="price">8,000<small> د.ع</small></span>
+              <div class="price-wrap">
+                <span class="price">8,000<small> د.ع</small></span>
+                <span class="price-unit">للشريط الواحد</span>
+              </div>
               <button class="btn add-cart-btn btn-sm" onclick="addToCart(this,'p18','Strepsils Honey and Lemon',8000)">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 4h2l2.4 12.2A2 2 0 0 0 9.36 18H18a2 2 0 0 0 1.96-1.6L21.5 8H6"/></svg>
                 أضف للسلة
@@ -791,7 +836,10 @@
             <h4>Strepsils Orange with Vitamin C</h4>
             <p class="desc">حبوب مص لالتهاب الحلق مدعمة بفيتامين سي، علبة 24 قرص.</p>
             <div class="product-foot">
-              <span class="price">8,000<small> د.ع</small></span>
+              <div class="price-wrap">
+                <span class="price">8,000<small> د.ع</small></span>
+                <span class="price-unit">للشريط الواحد</span>
+              </div>
               <button class="btn add-cart-btn btn-sm" onclick="addToCart(this,'p19','Strepsils Orange with Vitamin C',8000)">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 4h2l2.4 12.2A2 2 0 0 0 9.36 18H18a2 2 0 0 0 1.96-1.6L21.5 8H6"/></svg>
                 أضف للسلة
