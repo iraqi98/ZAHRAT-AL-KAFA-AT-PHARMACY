@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<title>الصفحة غير موجودة - صيدلية زهرة الكفاءات</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" type="image/png" href="logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Kufi+Arabic:wght@500;700;800&family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&display=swap">
+<style>
+  :root{
+    --bg: #FBFBF6;
+    --surface: #FFFFFF;
+    --ink: #142720;
+    --ink-muted: #55685D;
+    --accent-strong: #155e8a;
+    --border: #DCE7DF;
+  }
+  @media (prefers-color-scheme: dark){
+    :root{
+      --bg: #0d1620;
+      --surface: #142230;
+      --ink: #e8eef4;
+      --ink-muted: #9db0c2;
+      --accent-strong: #7bc0ef;
+      --border: #26394a;
+    }
+  }
+  *{ box-sizing: border-box; }
+  html,body{ margin:0; padding:0; height:100%; }
+  body{
+    background: var(--bg);
+    color: var(--ink);
+    font-family: "IBM Plex Sans Arabic", "Segoe UI", Tahoma, sans-serif;
+    display:flex; align-items:center; justify-content:center;
+    min-height:100vh; padding: 24px;
+  }
+  .card{
+    text-align:center; max-width: 420px;
+    background: var(--surface); border:1px solid var(--border);
+    border-radius: 20px; padding: 40px 32px;
+  }
+  .card img{ width:64px; height:64px; object-fit:contain; border-radius:12px; margin-bottom:18px; }
+  h1{
+    font-family: "Noto Kufi Arabic", "IBM Plex Sans Arabic", sans-serif;
+    font-size: 1.5rem; font-weight:800; color:var(--accent-strong); margin:0 0 10px;
+  }
+  p{ color: var(--ink-muted); font-size:0.95rem; margin:0 0 24px; line-height:1.7; }
+  a.btn{
+    display:inline-flex; align-items:center; justify-content:center;
+    padding: 12px 26px; border-radius:999px; text-decoration:none;
+    font-weight:700; font-size:0.95rem; color:#fff; background: var(--accent-strong);
+  }
+</style>
+</head>
+<body>
+<div class="card">
+  <img src="logo.png" alt="شعار صيدلية زهرة الكفاءات">
+  <h1>الصفحة غير موجودة</h1>
+  <p>عذرًا، الصفحة التي تبحث عنها غير متوفرة.</p>
+  <a class="btn" href="/">العودة للصفحة الرئيسية</a>
+</div>
+</body>
+</html>

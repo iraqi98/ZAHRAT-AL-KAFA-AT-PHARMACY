@@ -1,17 +1,25 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
+<meta charset="UTF-8">
 <title>صيدلية زهرة الكفاءات</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="description" content="صيدلية زهرة الكفاءات في بغداد - كفاءات السيدية. أدوية، مكملات غذائية، منتجات العناية بالبشرة والطفل، مع استشارة صيدلانية وتوصيل سريع عبر واتساب.">
+<!-- ملاحظة: عند ربط الدومين المخصص، حدّث og:image و og:url للدومين الجديد -->
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="صيدلية زهرة الكفاءات">
+<meta property="og:title" content="صيدلية زهرة الكفاءات - بغداد">
+<meta property="og:description" content="أدوية، مكملات غذائية، ومنتجات العناية بالبشرة والطفل. استشارة صيدلانية موثوقة وتوصيل سريع عبر واتساب.">
+<meta property="og:image" content="https://iraqi98.github.io/ZAHRAT-AL-KAFA-AT-PHARMACY/hero-image.png">
+<meta property="og:url" content="https://iraqi98.github.io/ZAHRAT-AL-KAFA-AT-PHARMACY/">
+<meta property="og:locale" content="ar_IQ">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" type="image/png" href="logo.png">
+<link rel="apple-touch-icon" href="logo.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Kufi+Arabic:wght@500;700;800&family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&display=swap" media="print" onload="this.media='all'">
 <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Kufi+Arabic:wght@500;700;800&family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&display=swap"></noscript>
-</head>
-<body>
-<div dir="rtl" lang="ar">
-
 <style>
   :root{
     --bg: #FBFBF6;
@@ -435,6 +443,8 @@
     .foot-social{ align-self:flex-start; }
   }
 </style>
+</head>
+<body>
 
 <!-- ===== nav ===== -->
 <header class="nav">
@@ -2124,7 +2134,7 @@
     var count = 0;
 
     if(ids.length === 0){
-      itemsEl.innerHTML = '<div class="cart-empty" id="cartEmptyMsg">' +
+      itemsEl.innerHTML = '<div class="cart-empty">' +
         '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 4h2l2.4 12.2A2 2 0 0 0 9.36 18H18a2 2 0 0 0 1.96-1.6L21.5 8H6"/><circle cx="9.5" cy="21" r="1.4" fill="currentColor" stroke="none"/><circle cx="17.5" cy="21" r="1.4" fill="currentColor" stroke="none"/></svg>' +
         'سلتك فارغة حاليًا.<br>أضف منتجات من قسم «المنتجات» لتبدأ طلبك.</div>';
     } else {
@@ -2197,6 +2207,5 @@
   }
 </script>
 
-</div>
 </body>
 </html>
