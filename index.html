@@ -205,6 +205,11 @@
 
   /* products */
   .product-card.search-hidden{ display:none; }
+  .show-more-btn.hidden{ display:none; }
+  .product-grid.searching{
+    grid-template-columns: repeat(auto-fill, minmax(180px, 240px));
+    justify-content: center;
+  }
   .cat-tabs{ display:flex; gap:10px; margin-bottom:30px; flex-wrap:wrap; }
   .cat-pill{
     padding: 9px 18px; border-radius:999px; font-size:0.88rem; font-weight:700;
@@ -2196,10 +2201,23 @@
     }, 400);
   }, 5000);
 
+  function exitSearchMode(){
+    document.querySelectorAll(".product-grid").forEach(function(g){
+      g.classList.remove("searching");
+      if(g.dataset.wasCollapsed === "true"){ g.classList.add("collapsed"); }
+      delete g.dataset.wasCollapsed;
+    });
+    document.querySelectorAll(".show-more-btn").forEach(function(btn){
+      btn.classList.remove("hidden");
+      btn.textContent = "عرض المزيد";
+    });
+  }
+
   function filterCategory(cat, btnEl){
     var searchBox = document.getElementById("productSearch");
     if(searchBox) searchBox.value = "";
     document.querySelectorAll(".product-card").forEach(function(c){ c.classList.remove("search-hidden"); });
+    exitSearchMode();
     document.querySelectorAll(".cat-pill").forEach(function(p){ p.classList.remove("active"); });
     if(btnEl){ btnEl.classList.add("active"); }
     document.querySelectorAll(".cat-block").forEach(function(block){
@@ -2218,6 +2236,7 @@
   function searchProducts(query){
     query = query.trim().toLowerCase();
     var cards = document.querySelectorAll(".product-card");
+    var grids = document.querySelectorAll(".product-grid");
     if(query === ""){
       var activeBtn = document.querySelector(".cat-pill.active");
       var activeCat = activeBtn ? activeBtn.getAttribute("data-cat") : "all";
@@ -2225,6 +2244,14 @@
       cards.forEach(function(c){ c.classList.remove("search-hidden"); });
       return;
     }
+    grids.forEach(function(g){
+      if(g.dataset.wasCollapsed === undefined){
+        g.dataset.wasCollapsed = g.classList.contains("collapsed") ? "true" : "false";
+      }
+      g.classList.remove("collapsed");
+      g.classList.add("searching");
+    });
+    document.querySelectorAll(".show-more-btn").forEach(function(btn){ btn.classList.add("hidden"); });
     document.querySelectorAll(".cat-block").forEach(function(block){ block.classList.remove("is-hidden"); });
     document.querySelectorAll(".cat-pill").forEach(function(p){ p.classList.remove("active"); });
     var anyVisibleInBlock = {};
